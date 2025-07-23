@@ -1,0 +1,26 @@
+{
+    "zone": "us-central1-a",
+    "pipeline_list": [
+        {
+            "num_stages": 1,
+            "layers_per_stage": [[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25]],
+            "tmp_per_stage": [
+                [
+                    [[["RTX-3090", 8, "us-central1-a"]], 8],
+                    [[["RTX-2080", 8, "us-central1-a"]], 8],
+                    [[["RTX-2080", 8, "us-central1-a"]], 8],
+                    [[["Titan-RTX", 8, "us-central1-a"]], 8],
+                    [[["RTX-2080", 8, "us-central1-a"]], 8],
+                    [[["Titan-RTX", 8, "us-central1-a"]], 8]
+                ]
+            ],
+            "dp": [6]
+        }
+    ],
+    "mbs": 2,
+    "gbs": 288,
+    "real": 70.78508,
+    "red_grads": 22.63707,
+    "max_mem": 9371123712,
+    "N": 6
+}

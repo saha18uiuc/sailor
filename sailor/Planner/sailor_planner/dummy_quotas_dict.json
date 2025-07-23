@@ -1,0 +1,16 @@
+{
+    "A100-40": {
+        "us-central1-a": 150,
+        "us-central1-b": 50,
+        "us-central1-c": 100,
+        "us-central1-f": 50,
+        "us-west1-b": 100
+    },
+    "V100-16": {
+        "us-central1-a": 150,
+        "us-central1-b": 50,
+        "us-central1-c": 100,
+        "us-central1-f": 50,
+        "us-west1-b": 100
+    }
+}

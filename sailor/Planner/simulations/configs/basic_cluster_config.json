@@ -1,0 +1,31 @@
+{
+	"A100-40":  {
+                "gpus_per_node": 4,
+                "mem_per_gpu": 42338615296
+        },
+        "V100-16":  {
+                "gpus_per_node": 4,
+                "mem_per_gpu": 17179869184
+        },
+        "A100-80":  {
+                "gpus_per_node": 4,
+                "mem_per_gpu": 85899345920
+        },
+        "GH-96":  {
+                "gpus_per_node": 4,
+                "mem_per_gpu": 102625181696
+        },
+        "Titan-RTX": {
+                "gpus_per_node": 8,
+                "mem_per_gpu": 25769803776
+        },
+        "RTX-2080": {
+                "gpus_per_node": 8,
+                "mem_per_gpu": 11811160064
+        },
+        "RTX-3090": {
+                "gpus_per_node": 8,
+                "mem_per_gpu": 25769803776
+        },
+        "zone": "us-central1-a"
+}

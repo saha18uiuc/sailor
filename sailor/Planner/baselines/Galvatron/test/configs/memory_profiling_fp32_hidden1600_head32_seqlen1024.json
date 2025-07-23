@@ -1,0 +1,23 @@
+{
+    "layertype_0": {
+        "parameter_size": 117.633544921875,
+        "tp_activation_per_bsz_dict": {
+            "1": 392.5653483072917,
+            "2": 392.5653483072917,
+            "4": 392.5653483072917,
+            "8": 392.5653483072917
+        }
+    },
+    "other_memory_pp_off": {
+        "model_states": 2631.57421875,
+        "activation": 211.5302734375
+    },
+    "other_memory_pp_on_first": {
+        "model_states": 1000000.0,
+        "activation": 1000000.0
+    },
+    "other_memory_pp_on_last": {
+        "model_states": 1000000.0,
+        "activation": 1000000.0
+    }
+}

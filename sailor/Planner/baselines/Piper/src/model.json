@@ -1,0 +1,1449 @@
+{
+  "maxDevices": 128,
+  "maxMemoryPerDevice": 42949672960,
+  "bandwidth": 6035913051.04673,
+  "mbsInBatch": 1024,
+  "nodes": [
+    {
+      "id": 0,
+      "name": "Embedding",
+      "TMPCs": {
+        "2": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.000828,
+            "parameterSize": 111673344,
+            "memoryUsageA": 8407040,
+            "memoryUsageB": 558366720,
+            "syncTimeFw": {},
+            "syncTimeBw": {
+              "1": 0
+            }
+          }
+        ],
+        "1": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.00040300000000000004,
+            "parameterSize": 214433792,
+            "memoryUsageA": 8388608,
+            "memoryUsageB": 1072168960,
+            "syncTimeFw": {},
+            "syncTimeBw": {
+              "1": 0
+            }
+          }
+        ],
+        "4": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.0009649999999999999,
+            "parameterSize": 60293120,
+            "memoryUsageA": 8407040,
+            "memoryUsageB": 301465600,
+            "syncTimeFw": {},
+            "syncTimeBw": {
+              "1": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 1,
+      "name": "Transformer",
+      "TMPCs": {
+        "2": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.005241,
+            "parameterSize": 25204736,
+            "memoryUsageA": 192954368,
+            "memoryUsageB": 126023680,
+            "syncTimeFw": {
+              "0": 0
+            },
+            "syncTimeBw": {
+              "2": 0
+            }
+          }
+        ],
+        "1": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.008692,
+            "parameterSize": 50384896,
+            "memoryUsageA": 360726528,
+            "memoryUsageB": 251924480,
+            "syncTimeFw": {
+              "0": 0
+            },
+            "syncTimeBw": {
+              "2": 0
+            }
+          }
+        ],
+        "4": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.004337,
+            "parameterSize": 12614656,
+            "memoryUsageA": 109592576,
+            "memoryUsageB": 63073280,
+            "syncTimeFw": {
+              "0": 0
+            },
+            "syncTimeBw": {
+              "2": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 2,
+      "name": "Transformer",
+      "TMPCs": {
+        "2": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.005306,
+            "parameterSize": 25204736,
+            "memoryUsageA": 192954368,
+            "memoryUsageB": 126023680,
+            "syncTimeFw": {
+              "1": 0
+            },
+            "syncTimeBw": {
+              "3": 0
+            }
+          }
+        ],
+        "1": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.008223000000000001,
+            "parameterSize": 50384896,
+            "memoryUsageA": 360726528,
+            "memoryUsageB": 251924480,
+            "syncTimeFw": {
+              "1": 0
+            },
+            "syncTimeBw": {
+              "3": 0
+            }
+          }
+        ],
+        "4": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.004412,
+            "parameterSize": 12614656,
+            "memoryUsageA": 109068288,
+            "memoryUsageB": 63073280,
+            "syncTimeFw": {
+              "1": 0
+            },
+            "syncTimeBw": {
+              "3": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 3,
+      "name": "Transformer",
+      "TMPCs": {
+        "2": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.005306,
+            "parameterSize": 25204736,
+            "memoryUsageA": 192954368,
+            "memoryUsageB": 126023680,
+            "syncTimeFw": {
+              "2": 0
+            },
+            "syncTimeBw": {
+              "4": 0
+            }
+          }
+        ],
+        "1": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.008223000000000001,
+            "parameterSize": 50384896,
+            "memoryUsageA": 360726528,
+            "memoryUsageB": 251924480,
+            "syncTimeFw": {
+              "2": 0
+            },
+            "syncTimeBw": {
+              "4": 0
+            }
+          }
+        ],
+        "4": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.004412,
+            "parameterSize": 12614656,
+            "memoryUsageA": 109068288,
+            "memoryUsageB": 63073280,
+            "syncTimeFw": {
+              "2": 0
+            },
+            "syncTimeBw": {
+              "4": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 4,
+      "name": "Transformer",
+      "TMPCs": {
+        "2": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.005306,
+            "parameterSize": 25204736,
+            "memoryUsageA": 192954368,
+            "memoryUsageB": 126023680,
+            "syncTimeFw": {
+              "3": 0
+            },
+            "syncTimeBw": {
+              "5": 0
+            }
+          }
+        ],
+        "1": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.008223000000000001,
+            "parameterSize": 50384896,
+            "memoryUsageA": 360726528,
+            "memoryUsageB": 251924480,
+            "syncTimeFw": {
+              "3": 0
+            },
+            "syncTimeBw": {
+              "5": 0
+            }
+          }
+        ],
+        "4": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.004412,
+            "parameterSize": 12614656,
+            "memoryUsageA": 109068288,
+            "memoryUsageB": 63073280,
+            "syncTimeFw": {
+              "3": 0
+            },
+            "syncTimeBw": {
+              "5": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 5,
+      "name": "Transformer",
+      "TMPCs": {
+        "2": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.005306,
+            "parameterSize": 25204736,
+            "memoryUsageA": 192954368,
+            "memoryUsageB": 126023680,
+            "syncTimeFw": {
+              "4": 0
+            },
+            "syncTimeBw": {
+              "6": 0
+            }
+          }
+        ],
+        "1": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.008223000000000001,
+            "parameterSize": 50384896,
+            "memoryUsageA": 360726528,
+            "memoryUsageB": 251924480,
+            "syncTimeFw": {
+              "4": 0
+            },
+            "syncTimeBw": {
+              "6": 0
+            }
+          }
+        ],
+        "4": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.004412,
+            "parameterSize": 12614656,
+            "memoryUsageA": 109068288,
+            "memoryUsageB": 63073280,
+            "syncTimeFw": {
+              "4": 0
+            },
+            "syncTimeBw": {
+              "6": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 6,
+      "name": "Transformer",
+      "TMPCs": {
+        "2": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.005306,
+            "parameterSize": 25204736,
+            "memoryUsageA": 192954368,
+            "memoryUsageB": 126023680,
+            "syncTimeFw": {
+              "5": 0
+            },
+            "syncTimeBw": {
+              "7": 0
+            }
+          }
+        ],
+        "1": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.008223000000000001,
+            "parameterSize": 50384896,
+            "memoryUsageA": 360726528,
+            "memoryUsageB": 251924480,
+            "syncTimeFw": {
+              "5": 0
+            },
+            "syncTimeBw": {
+              "7": 0
+            }
+          }
+        ],
+        "4": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.004412,
+            "parameterSize": 12614656,
+            "memoryUsageA": 109068288,
+            "memoryUsageB": 63073280,
+            "syncTimeFw": {
+              "5": 0
+            },
+            "syncTimeBw": {
+              "7": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 7,
+      "name": "Transformer",
+      "TMPCs": {
+        "2": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.005306,
+            "parameterSize": 25204736,
+            "memoryUsageA": 192954368,
+            "memoryUsageB": 126023680,
+            "syncTimeFw": {
+              "6": 0
+            },
+            "syncTimeBw": {
+              "8": 0
+            }
+          }
+        ],
+        "1": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.008223000000000001,
+            "parameterSize": 50384896,
+            "memoryUsageA": 360726528,
+            "memoryUsageB": 251924480,
+            "syncTimeFw": {
+              "6": 0
+            },
+            "syncTimeBw": {
+              "8": 0
+            }
+          }
+        ],
+        "4": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.004412,
+            "parameterSize": 12614656,
+            "memoryUsageA": 109068288,
+            "memoryUsageB": 63073280,
+            "syncTimeFw": {
+              "6": 0
+            },
+            "syncTimeBw": {
+              "8": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 8,
+      "name": "Transformer",
+      "TMPCs": {
+        "2": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.005306,
+            "parameterSize": 25204736,
+            "memoryUsageA": 192954368,
+            "memoryUsageB": 126023680,
+            "syncTimeFw": {
+              "7": 0
+            },
+            "syncTimeBw": {
+              "9": 0
+            }
+          }
+        ],
+        "1": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.008223000000000001,
+            "parameterSize": 50384896,
+            "memoryUsageA": 360726528,
+            "memoryUsageB": 251924480,
+            "syncTimeFw": {
+              "7": 0
+            },
+            "syncTimeBw": {
+              "9": 0
+            }
+          }
+        ],
+        "4": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.004412,
+            "parameterSize": 12614656,
+            "memoryUsageA": 109068288,
+            "memoryUsageB": 63073280,
+            "syncTimeFw": {
+              "7": 0
+            },
+            "syncTimeBw": {
+              "9": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 9,
+      "name": "Transformer",
+      "TMPCs": {
+        "2": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.005306,
+            "parameterSize": 25204736,
+            "memoryUsageA": 192954368,
+            "memoryUsageB": 126023680,
+            "syncTimeFw": {
+              "8": 0
+            },
+            "syncTimeBw": {
+              "10": 0
+            }
+          }
+        ],
+        "1": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.008223000000000001,
+            "parameterSize": 50384896,
+            "memoryUsageA": 360726528,
+            "memoryUsageB": 251924480,
+            "syncTimeFw": {
+              "8": 0
+            },
+            "syncTimeBw": {
+              "10": 0
+            }
+          }
+        ],
+        "4": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.004412,
+            "parameterSize": 12614656,
+            "memoryUsageA": 109068288,
+            "memoryUsageB": 63073280,
+            "syncTimeFw": {
+              "8": 0
+            },
+            "syncTimeBw": {
+              "10": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 10,
+      "name": "Transformer",
+      "TMPCs": {
+        "2": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.005306,
+            "parameterSize": 25204736,
+            "memoryUsageA": 192954368,
+            "memoryUsageB": 126023680,
+            "syncTimeFw": {
+              "9": 0
+            },
+            "syncTimeBw": {
+              "11": 0
+            }
+          }
+        ],
+        "1": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.008223000000000001,
+            "parameterSize": 50384896,
+            "memoryUsageA": 360726528,
+            "memoryUsageB": 251924480,
+            "syncTimeFw": {
+              "9": 0
+            },
+            "syncTimeBw": {
+              "11": 0
+            }
+          }
+        ],
+        "4": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.004412,
+            "parameterSize": 12614656,
+            "memoryUsageA": 109068288,
+            "memoryUsageB": 63073280,
+            "syncTimeFw": {
+              "9": 0
+            },
+            "syncTimeBw": {
+              "11": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 11,
+      "name": "Transformer",
+      "TMPCs": {
+        "2": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.005306,
+            "parameterSize": 25204736,
+            "memoryUsageA": 192954368,
+            "memoryUsageB": 126023680,
+            "syncTimeFw": {
+              "10": 0
+            },
+            "syncTimeBw": {
+              "12": 0
+            }
+          }
+        ],
+        "1": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.008223000000000001,
+            "parameterSize": 50384896,
+            "memoryUsageA": 360726528,
+            "memoryUsageB": 251924480,
+            "syncTimeFw": {
+              "10": 0
+            },
+            "syncTimeBw": {
+              "12": 0
+            }
+          }
+        ],
+        "4": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.004412,
+            "parameterSize": 12614656,
+            "memoryUsageA": 109068288,
+            "memoryUsageB": 63073280,
+            "syncTimeFw": {
+              "10": 0
+            },
+            "syncTimeBw": {
+              "12": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 12,
+      "name": "Transformer",
+      "TMPCs": {
+        "2": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.005306,
+            "parameterSize": 25204736,
+            "memoryUsageA": 192954368,
+            "memoryUsageB": 126023680,
+            "syncTimeFw": {
+              "11": 0
+            },
+            "syncTimeBw": {
+              "13": 0
+            }
+          }
+        ],
+        "1": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.008223000000000001,
+            "parameterSize": 50384896,
+            "memoryUsageA": 360726528,
+            "memoryUsageB": 251924480,
+            "syncTimeFw": {
+              "11": 0
+            },
+            "syncTimeBw": {
+              "13": 0
+            }
+          }
+        ],
+        "4": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.004412,
+            "parameterSize": 12614656,
+            "memoryUsageA": 109068288,
+            "memoryUsageB": 63073280,
+            "syncTimeFw": {
+              "11": 0
+            },
+            "syncTimeBw": {
+              "13": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 13,
+      "name": "Transformer",
+      "TMPCs": {
+        "2": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.005306,
+            "parameterSize": 25204736,
+            "memoryUsageA": 192954368,
+            "memoryUsageB": 126023680,
+            "syncTimeFw": {
+              "12": 0
+            },
+            "syncTimeBw": {
+              "14": 0
+            }
+          }
+        ],
+        "1": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.008223000000000001,
+            "parameterSize": 50384896,
+            "memoryUsageA": 360726528,
+            "memoryUsageB": 251924480,
+            "syncTimeFw": {
+              "12": 0
+            },
+            "syncTimeBw": {
+              "14": 0
+            }
+          }
+        ],
+        "4": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.004412,
+            "parameterSize": 12614656,
+            "memoryUsageA": 109068288,
+            "memoryUsageB": 63073280,
+            "syncTimeFw": {
+              "12": 0
+            },
+            "syncTimeBw": {
+              "14": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 14,
+      "name": "Transformer",
+      "TMPCs": {
+        "2": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.005306,
+            "parameterSize": 25204736,
+            "memoryUsageA": 192954368,
+            "memoryUsageB": 126023680,
+            "syncTimeFw": {
+              "13": 0
+            },
+            "syncTimeBw": {
+              "15": 0
+            }
+          }
+        ],
+        "1": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.008223000000000001,
+            "parameterSize": 50384896,
+            "memoryUsageA": 360726528,
+            "memoryUsageB": 251924480,
+            "syncTimeFw": {
+              "13": 0
+            },
+            "syncTimeBw": {
+              "15": 0
+            }
+          }
+        ],
+        "4": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.004412,
+            "parameterSize": 12614656,
+            "memoryUsageA": 109068288,
+            "memoryUsageB": 63073280,
+            "syncTimeFw": {
+              "13": 0
+            },
+            "syncTimeBw": {
+              "15": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 15,
+      "name": "Transformer",
+      "TMPCs": {
+        "2": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.005306,
+            "parameterSize": 25204736,
+            "memoryUsageA": 192954368,
+            "memoryUsageB": 126023680,
+            "syncTimeFw": {
+              "14": 0
+            },
+            "syncTimeBw": {
+              "16": 0
+            }
+          }
+        ],
+        "1": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.008223000000000001,
+            "parameterSize": 50384896,
+            "memoryUsageA": 360726528,
+            "memoryUsageB": 251924480,
+            "syncTimeFw": {
+              "14": 0
+            },
+            "syncTimeBw": {
+              "16": 0
+            }
+          }
+        ],
+        "4": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.004412,
+            "parameterSize": 12614656,
+            "memoryUsageA": 109068288,
+            "memoryUsageB": 63073280,
+            "syncTimeFw": {
+              "14": 0
+            },
+            "syncTimeBw": {
+              "16": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 16,
+      "name": "Transformer",
+      "TMPCs": {
+        "2": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.005306,
+            "parameterSize": 25204736,
+            "memoryUsageA": 192954368,
+            "memoryUsageB": 126023680,
+            "syncTimeFw": {
+              "15": 0
+            },
+            "syncTimeBw": {
+              "17": 0
+            }
+          }
+        ],
+        "1": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.008223000000000001,
+            "parameterSize": 50384896,
+            "memoryUsageA": 360726528,
+            "memoryUsageB": 251924480,
+            "syncTimeFw": {
+              "15": 0
+            },
+            "syncTimeBw": {
+              "17": 0
+            }
+          }
+        ],
+        "4": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.004412,
+            "parameterSize": 12614656,
+            "memoryUsageA": 109068288,
+            "memoryUsageB": 63073280,
+            "syncTimeFw": {
+              "15": 0
+            },
+            "syncTimeBw": {
+              "17": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 17,
+      "name": "Transformer",
+      "TMPCs": {
+        "2": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.005306,
+            "parameterSize": 25204736,
+            "memoryUsageA": 192954368,
+            "memoryUsageB": 126023680,
+            "syncTimeFw": {
+              "16": 0
+            },
+            "syncTimeBw": {
+              "18": 0
+            }
+          }
+        ],
+        "1": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.008223000000000001,
+            "parameterSize": 50384896,
+            "memoryUsageA": 360726528,
+            "memoryUsageB": 251924480,
+            "syncTimeFw": {
+              "16": 0
+            },
+            "syncTimeBw": {
+              "18": 0
+            }
+          }
+        ],
+        "4": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.004412,
+            "parameterSize": 12614656,
+            "memoryUsageA": 109068288,
+            "memoryUsageB": 63073280,
+            "syncTimeFw": {
+              "16": 0
+            },
+            "syncTimeBw": {
+              "18": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 18,
+      "name": "Transformer",
+      "TMPCs": {
+        "2": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.005306,
+            "parameterSize": 25204736,
+            "memoryUsageA": 192954368,
+            "memoryUsageB": 126023680,
+            "syncTimeFw": {
+              "17": 0
+            },
+            "syncTimeBw": {
+              "19": 0
+            }
+          }
+        ],
+        "1": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.008223000000000001,
+            "parameterSize": 50384896,
+            "memoryUsageA": 360726528,
+            "memoryUsageB": 251924480,
+            "syncTimeFw": {
+              "17": 0
+            },
+            "syncTimeBw": {
+              "19": 0
+            }
+          }
+        ],
+        "4": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.004412,
+            "parameterSize": 12614656,
+            "memoryUsageA": 109068288,
+            "memoryUsageB": 63073280,
+            "syncTimeFw": {
+              "17": 0
+            },
+            "syncTimeBw": {
+              "19": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 19,
+      "name": "Transformer",
+      "TMPCs": {
+        "2": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.005306,
+            "parameterSize": 25204736,
+            "memoryUsageA": 192954368,
+            "memoryUsageB": 126023680,
+            "syncTimeFw": {
+              "18": 0
+            },
+            "syncTimeBw": {
+              "20": 0
+            }
+          }
+        ],
+        "1": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.008223000000000001,
+            "parameterSize": 50384896,
+            "memoryUsageA": 360726528,
+            "memoryUsageB": 251924480,
+            "syncTimeFw": {
+              "18": 0
+            },
+            "syncTimeBw": {
+              "20": 0
+            }
+          }
+        ],
+        "4": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.004412,
+            "parameterSize": 12614656,
+            "memoryUsageA": 109068288,
+            "memoryUsageB": 63073280,
+            "syncTimeFw": {
+              "18": 0
+            },
+            "syncTimeBw": {
+              "20": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 20,
+      "name": "Transformer",
+      "TMPCs": {
+        "2": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.005306,
+            "parameterSize": 25204736,
+            "memoryUsageA": 192954368,
+            "memoryUsageB": 126023680,
+            "syncTimeFw": {
+              "19": 0
+            },
+            "syncTimeBw": {
+              "21": 0
+            }
+          }
+        ],
+        "1": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.008223000000000001,
+            "parameterSize": 50384896,
+            "memoryUsageA": 360726528,
+            "memoryUsageB": 251924480,
+            "syncTimeFw": {
+              "19": 0
+            },
+            "syncTimeBw": {
+              "21": 0
+            }
+          }
+        ],
+        "4": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.004412,
+            "parameterSize": 12614656,
+            "memoryUsageA": 109068288,
+            "memoryUsageB": 63073280,
+            "syncTimeFw": {
+              "19": 0
+            },
+            "syncTimeBw": {
+              "21": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 21,
+      "name": "Transformer",
+      "TMPCs": {
+        "2": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.005306,
+            "parameterSize": 25204736,
+            "memoryUsageA": 192954368,
+            "memoryUsageB": 126023680,
+            "syncTimeFw": {
+              "20": 0
+            },
+            "syncTimeBw": {
+              "22": 0
+            }
+          }
+        ],
+        "1": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.008223000000000001,
+            "parameterSize": 50384896,
+            "memoryUsageA": 360726528,
+            "memoryUsageB": 251924480,
+            "syncTimeFw": {
+              "20": 0
+            },
+            "syncTimeBw": {
+              "22": 0
+            }
+          }
+        ],
+        "4": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.004412,
+            "parameterSize": 12614656,
+            "memoryUsageA": 109068288,
+            "memoryUsageB": 63073280,
+            "syncTimeFw": {
+              "20": 0
+            },
+            "syncTimeBw": {
+              "22": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 22,
+      "name": "Transformer",
+      "TMPCs": {
+        "2": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.005306,
+            "parameterSize": 25204736,
+            "memoryUsageA": 192954368,
+            "memoryUsageB": 126023680,
+            "syncTimeFw": {
+              "21": 0
+            },
+            "syncTimeBw": {
+              "23": 0
+            }
+          }
+        ],
+        "1": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.008223000000000001,
+            "parameterSize": 50384896,
+            "memoryUsageA": 360726528,
+            "memoryUsageB": 251924480,
+            "syncTimeFw": {
+              "21": 0
+            },
+            "syncTimeBw": {
+              "23": 0
+            }
+          }
+        ],
+        "4": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.004412,
+            "parameterSize": 12614656,
+            "memoryUsageA": 109068288,
+            "memoryUsageB": 63073280,
+            "syncTimeFw": {
+              "21": 0
+            },
+            "syncTimeBw": {
+              "23": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 23,
+      "name": "Transformer",
+      "TMPCs": {
+        "2": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.005306,
+            "parameterSize": 25204736,
+            "memoryUsageA": 192954368,
+            "memoryUsageB": 126023680,
+            "syncTimeFw": {
+              "22": 0
+            },
+            "syncTimeBw": {
+              "24": 0
+            }
+          }
+        ],
+        "1": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.008223000000000001,
+            "parameterSize": 50384896,
+            "memoryUsageA": 360726528,
+            "memoryUsageB": 251924480,
+            "syncTimeFw": {
+              "22": 0
+            },
+            "syncTimeBw": {
+              "24": 0
+            }
+          }
+        ],
+        "4": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.004412,
+            "parameterSize": 12614656,
+            "memoryUsageA": 109068288,
+            "memoryUsageB": 63073280,
+            "syncTimeFw": {
+              "22": 0
+            },
+            "syncTimeBw": {
+              "24": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 24,
+      "name": "Transformer",
+      "TMPCs": {
+        "2": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.005306,
+            "parameterSize": 25204736,
+            "memoryUsageA": 192954368,
+            "memoryUsageB": 126023680,
+            "syncTimeFw": {
+              "23": 0
+            },
+            "syncTimeBw": {
+              "25": 0
+            }
+          }
+        ],
+        "1": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.008223000000000001,
+            "parameterSize": 50384896,
+            "memoryUsageA": 360726528,
+            "memoryUsageB": 251924480,
+            "syncTimeFw": {
+              "23": 0
+            },
+            "syncTimeBw": {
+              "25": 0
+            }
+          }
+        ],
+        "4": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.004412,
+            "parameterSize": 12614656,
+            "memoryUsageA": 109068288,
+            "memoryUsageB": 63073280,
+            "syncTimeFw": {
+              "23": 0
+            },
+            "syncTimeBw": {
+              "25": 0
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": 25,
+      "name": "Head",
+      "TMPCs": {
+        "2": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.004923,
+            "parameterSize": 103292928,
+            "memoryUsageA": 423652352,
+            "memoryUsageB": 516464640,
+            "syncTimeFw": {
+              "24": 0
+            },
+            "syncTimeBw": {}
+          }
+        ],
+        "1": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.008497000000000001,
+            "parameterSize": 206053376,
+            "memoryUsageA": 834694144,
+            "memoryUsageB": 1030266880,
+            "syncTimeFw": {
+              "24": 0
+            },
+            "syncTimeBw": {}
+          }
+        ],
+        "4": [
+          {
+            "id": "vanilla",
+            "timePerSample": 0.004289,
+            "parameterSize": 51912704,
+            "memoryUsageA": 218131456,
+            "memoryUsageB": 259563520,
+            "syncTimeFw": {
+              "24": 0
+            },
+            "syncTimeBw": {}
+          }
+        ]
+      }
+    }
+  ],
+  "edges": [
+    {
+      "sourceId": 0,
+      "destId": 1,
+      "communicationCost": 8388608
+    },
+    {
+      "sourceId": 1,
+      "destId": 2,
+      "communicationCost": 8388608
+    },
+    {
+      "sourceId": 2,
+      "destId": 3,
+      "communicationCost": 8388608
+    },
+    {
+      "sourceId": 3,
+      "destId": 4,
+      "communicationCost": 8388608
+    },
+    {
+      "sourceId": 4,
+      "destId": 5,
+      "communicationCost": 8388608
+    },
+    {
+      "sourceId": 5,
+      "destId": 6,
+      "communicationCost": 8388608
+    },
+    {
+      "sourceId": 6,
+      "destId": 7,
+      "communicationCost": 8388608
+    },
+    {
+      "sourceId": 7,
+      "destId": 8,
+      "communicationCost": 8388608
+    },
+    {
+      "sourceId": 8,
+      "destId": 9,
+      "communicationCost": 8388608
+    },
+    {
+      "sourceId": 9,
+      "destId": 10,
+      "communicationCost": 8388608
+    },
+    {
+      "sourceId": 10,
+      "destId": 11,
+      "communicationCost": 8388608
+    },
+    {
+      "sourceId": 11,
+      "destId": 12,
+      "communicationCost": 8388608
+    },
+    {
+      "sourceId": 12,
+      "destId": 13,
+      "communicationCost": 8388608
+    },
+    {
+      "sourceId": 13,
+      "destId": 14,
+      "communicationCost": 8388608
+    },
+    {
+      "sourceId": 14,
+      "destId": 15,
+      "communicationCost": 8388608
+    },
+    {
+      "sourceId": 15,
+      "destId": 16,
+      "communicationCost": 8388608
+    },
+    {
+      "sourceId": 16,
+      "destId": 17,
+      "communicationCost": 8388608
+    },
+    {
+      "sourceId": 17,
+      "destId": 18,
+      "communicationCost": 8388608
+    },
+    {
+      "sourceId": 18,
+      "destId": 19,
+      "communicationCost": 8388608
+    },
+    {
+      "sourceId": 19,
+      "destId": 20,
+      "communicationCost": 8388608
+    },
+    {
+      "sourceId": 20,
+      "destId": 21,
+      "communicationCost": 8388608
+    },
+    {
+      "sourceId": 21,
+      "destId": 22,
+      "communicationCost": 8388608
+    },
+    {
+      "sourceId": 22,
+      "destId": 23,
+      "communicationCost": 8388608
+    },
+    {
+      "sourceId": 23,
+      "destId": 24,
+      "communicationCost": 8388608
+    },
+    {
+      "sourceId": 24,
+      "destId": 25,
+      "communicationCost": 8388608
+    }
+  ]
+}

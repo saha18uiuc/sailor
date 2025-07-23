@@ -1,0 +1,600 @@
+{
+  "0": {
+    "1": {
+      "forward": 0.0014,
+      "backward": 0.0,
+      "params_bytes": 111673344,
+      "mem_required": 292813004.8,
+      "output_activation": 4194304.0
+    },
+    "4": {
+      "forward": 0.002,
+      "backward": 0.0,
+      "params_bytes": 111673344,
+      "mem_required": 450602752.0,
+      "output_activation": 16777216.0
+    },
+    "2": {
+      "forward": 0.0014,
+      "backward": 0.0,
+      "params_bytes": 111673344,
+      "mem_required": 351132723.2,
+      "output_activation": 8388608.0
+    }
+  },
+  "1": {
+    "1": {
+      "forward": 0.0049,
+      "backward": 0.0095,
+      "params_bytes": 25204736,
+      "mem_required": 390031974.4,
+      "output_activation": 4194304.0
+    },
+    "4": {
+      "forward": 0.0163,
+      "backward": 0.0357,
+      "params_bytes": 25204736,
+      "mem_required": 1346456166.4,
+      "output_activation": 16777216.0
+    },
+    "2": {
+      "forward": 0.0089,
+      "backward": 0.0186,
+      "params_bytes": 25204736,
+      "mem_required": 708840038.4,
+      "output_activation": 8388608.0
+    }
+  },
+  "2": {
+    "1": {
+      "forward": 0.0049,
+      "backward": 0.0095,
+      "params_bytes": 25204736,
+      "mem_required": 390031974.4,
+      "output_activation": 4194304.0
+    },
+    "4": {
+      "forward": 0.0163,
+      "backward": 0.0357,
+      "params_bytes": 25204736,
+      "mem_required": 1346456166.4,
+      "output_activation": 16777216.0
+    },
+    "2": {
+      "forward": 0.0089,
+      "backward": 0.0186,
+      "params_bytes": 25204736,
+      "mem_required": 708840038.4,
+      "output_activation": 8388608.0
+    }
+  },
+  "3": {
+    "1": {
+      "forward": 0.0049,
+      "backward": 0.0095,
+      "params_bytes": 25204736,
+      "mem_required": 390031974.4,
+      "output_activation": 4194304.0
+    },
+    "4": {
+      "forward": 0.0163,
+      "backward": 0.0357,
+      "params_bytes": 25204736,
+      "mem_required": 1346456166.4,
+      "output_activation": 16777216.0
+    },
+    "2": {
+      "forward": 0.0089,
+      "backward": 0.0186,
+      "params_bytes": 25204736,
+      "mem_required": 708840038.4,
+      "output_activation": 8388608.0
+    }
+  },
+  "4": {
+    "1": {
+      "forward": 0.0049,
+      "backward": 0.0095,
+      "params_bytes": 25204736,
+      "mem_required": 390031974.4,
+      "output_activation": 4194304.0
+    },
+    "4": {
+      "forward": 0.0163,
+      "backward": 0.0357,
+      "params_bytes": 25204736,
+      "mem_required": 1346456166.4,
+      "output_activation": 16777216.0
+    },
+    "2": {
+      "forward": 0.0089,
+      "backward": 0.0186,
+      "params_bytes": 25204736,
+      "mem_required": 708840038.4,
+      "output_activation": 8388608.0
+    }
+  },
+  "5": {
+    "1": {
+      "forward": 0.0049,
+      "backward": 0.0095,
+      "params_bytes": 25204736,
+      "mem_required": 390031974.4,
+      "output_activation": 4194304.0
+    },
+    "4": {
+      "forward": 0.0163,
+      "backward": 0.0357,
+      "params_bytes": 25204736,
+      "mem_required": 1346456166.4,
+      "output_activation": 16777216.0
+    },
+    "2": {
+      "forward": 0.0089,
+      "backward": 0.0186,
+      "params_bytes": 25204736,
+      "mem_required": 708840038.4,
+      "output_activation": 8388608.0
+    }
+  },
+  "6": {
+    "1": {
+      "forward": 0.0049,
+      "backward": 0.0095,
+      "params_bytes": 25204736,
+      "mem_required": 390031974.4,
+      "output_activation": 4194304.0
+    },
+    "4": {
+      "forward": 0.0163,
+      "backward": 0.0357,
+      "params_bytes": 25204736,
+      "mem_required": 1346456166.4,
+      "output_activation": 16777216.0
+    },
+    "2": {
+      "forward": 0.0089,
+      "backward": 0.0186,
+      "params_bytes": 25204736,
+      "mem_required": 708840038.4,
+      "output_activation": 8388608.0
+    }
+  },
+  "7": {
+    "1": {
+      "forward": 0.0049,
+      "backward": 0.0095,
+      "params_bytes": 25204736,
+      "mem_required": 390031974.4,
+      "output_activation": 4194304.0
+    },
+    "4": {
+      "forward": 0.0163,
+      "backward": 0.0357,
+      "params_bytes": 25204736,
+      "mem_required": 1346456166.4,
+      "output_activation": 16777216.0
+    },
+    "2": {
+      "forward": 0.0089,
+      "backward": 0.0186,
+      "params_bytes": 25204736,
+      "mem_required": 708840038.4,
+      "output_activation": 8388608.0
+    }
+  },
+  "8": {
+    "1": {
+      "forward": 0.0049,
+      "backward": 0.0095,
+      "params_bytes": 25204736,
+      "mem_required": 390031974.4,
+      "output_activation": 4194304.0
+    },
+    "4": {
+      "forward": 0.0163,
+      "backward": 0.0357,
+      "params_bytes": 25204736,
+      "mem_required": 1346456166.4,
+      "output_activation": 16777216.0
+    },
+    "2": {
+      "forward": 0.0089,
+      "backward": 0.0186,
+      "params_bytes": 25204736,
+      "mem_required": 708840038.4,
+      "output_activation": 8388608.0
+    }
+  },
+  "9": {
+    "1": {
+      "forward": 0.0049,
+      "backward": 0.0095,
+      "params_bytes": 25204736,
+      "mem_required": 390031974.4,
+      "output_activation": 4194304.0
+    },
+    "4": {
+      "forward": 0.0163,
+      "backward": 0.0357,
+      "params_bytes": 25204736,
+      "mem_required": 1346456166.4,
+      "output_activation": 16777216.0
+    },
+    "2": {
+      "forward": 0.0089,
+      "backward": 0.0186,
+      "params_bytes": 25204736,
+      "mem_required": 708840038.4,
+      "output_activation": 8388608.0
+    }
+  },
+  "10": {
+    "1": {
+      "forward": 0.0049,
+      "backward": 0.0095,
+      "params_bytes": 25204736,
+      "mem_required": 390031974.4,
+      "output_activation": 4194304.0
+    },
+    "4": {
+      "forward": 0.0163,
+      "backward": 0.0357,
+      "params_bytes": 25204736,
+      "mem_required": 1346456166.4,
+      "output_activation": 16777216.0
+    },
+    "2": {
+      "forward": 0.0089,
+      "backward": 0.0186,
+      "params_bytes": 25204736,
+      "mem_required": 708840038.4,
+      "output_activation": 8388608.0
+    }
+  },
+  "11": {
+    "1": {
+      "forward": 0.0049,
+      "backward": 0.0095,
+      "params_bytes": 25204736,
+      "mem_required": 390031974.4,
+      "output_activation": 4194304.0
+    },
+    "4": {
+      "forward": 0.0163,
+      "backward": 0.0357,
+      "params_bytes": 25204736,
+      "mem_required": 1346456166.4,
+      "output_activation": 16777216.0
+    },
+    "2": {
+      "forward": 0.0089,
+      "backward": 0.0186,
+      "params_bytes": 25204736,
+      "mem_required": 708840038.4,
+      "output_activation": 8388608.0
+    }
+  },
+  "12": {
+    "1": {
+      "forward": 0.0049,
+      "backward": 0.0095,
+      "params_bytes": 25204736,
+      "mem_required": 390031974.4,
+      "output_activation": 4194304.0
+    },
+    "4": {
+      "forward": 0.0163,
+      "backward": 0.0357,
+      "params_bytes": 25204736,
+      "mem_required": 1346456166.4,
+      "output_activation": 16777216.0
+    },
+    "2": {
+      "forward": 0.0089,
+      "backward": 0.0186,
+      "params_bytes": 25204736,
+      "mem_required": 708840038.4,
+      "output_activation": 8388608.0
+    }
+  },
+  "13": {
+    "1": {
+      "forward": 0.0049,
+      "backward": 0.0095,
+      "params_bytes": 25204736,
+      "mem_required": 390031974.4,
+      "output_activation": 4194304.0
+    },
+    "4": {
+      "forward": 0.0163,
+      "backward": 0.0357,
+      "params_bytes": 25204736,
+      "mem_required": 1346456166.4,
+      "output_activation": 16777216.0
+    },
+    "2": {
+      "forward": 0.0089,
+      "backward": 0.0186,
+      "params_bytes": 25204736,
+      "mem_required": 708840038.4,
+      "output_activation": 8388608.0
+    }
+  },
+  "14": {
+    "1": {
+      "forward": 0.0049,
+      "backward": 0.0095,
+      "params_bytes": 25204736,
+      "mem_required": 390031974.4,
+      "output_activation": 4194304.0
+    },
+    "4": {
+      "forward": 0.0163,
+      "backward": 0.0357,
+      "params_bytes": 25204736,
+      "mem_required": 1346456166.4,
+      "output_activation": 16777216.0
+    },
+    "2": {
+      "forward": 0.0089,
+      "backward": 0.0186,
+      "params_bytes": 25204736,
+      "mem_required": 708840038.4,
+      "output_activation": 8388608.0
+    }
+  },
+  "15": {
+    "1": {
+      "forward": 0.0049,
+      "backward": 0.0095,
+      "params_bytes": 25204736,
+      "mem_required": 390031974.4,
+      "output_activation": 4194304.0
+    },
+    "4": {
+      "forward": 0.0163,
+      "backward": 0.0357,
+      "params_bytes": 25204736,
+      "mem_required": 1346456166.4,
+      "output_activation": 16777216.0
+    },
+    "2": {
+      "forward": 0.0089,
+      "backward": 0.0186,
+      "params_bytes": 25204736,
+      "mem_required": 708840038.4,
+      "output_activation": 8388608.0
+    }
+  },
+  "16": {
+    "1": {
+      "forward": 0.0049,
+      "backward": 0.0095,
+      "params_bytes": 25204736,
+      "mem_required": 390031974.4,
+      "output_activation": 4194304.0
+    },
+    "4": {
+      "forward": 0.0163,
+      "backward": 0.0357,
+      "params_bytes": 25204736,
+      "mem_required": 1346456166.4,
+      "output_activation": 16777216.0
+    },
+    "2": {
+      "forward": 0.0089,
+      "backward": 0.0186,
+      "params_bytes": 25204736,
+      "mem_required": 708840038.4,
+      "output_activation": 8388608.0
+    }
+  },
+  "17": {
+    "1": {
+      "forward": 0.0049,
+      "backward": 0.0095,
+      "params_bytes": 25204736,
+      "mem_required": 390031974.4,
+      "output_activation": 4194304.0
+    },
+    "4": {
+      "forward": 0.0163,
+      "backward": 0.0357,
+      "params_bytes": 25204736,
+      "mem_required": 1346456166.4,
+      "output_activation": 16777216.0
+    },
+    "2": {
+      "forward": 0.0089,
+      "backward": 0.0186,
+      "params_bytes": 25204736,
+      "mem_required": 708840038.4,
+      "output_activation": 8388608.0
+    }
+  },
+  "18": {
+    "1": {
+      "forward": 0.0049,
+      "backward": 0.0095,
+      "params_bytes": 25204736,
+      "mem_required": 390031974.4,
+      "output_activation": 4194304.0
+    },
+    "4": {
+      "forward": 0.0163,
+      "backward": 0.0357,
+      "params_bytes": 25204736,
+      "mem_required": 1346456166.4,
+      "output_activation": 16777216.0
+    },
+    "2": {
+      "forward": 0.0089,
+      "backward": 0.0186,
+      "params_bytes": 25204736,
+      "mem_required": 708840038.4,
+      "output_activation": 8388608.0
+    }
+  },
+  "19": {
+    "1": {
+      "forward": 0.0049,
+      "backward": 0.0095,
+      "params_bytes": 25204736,
+      "mem_required": 390031974.4,
+      "output_activation": 4194304.0
+    },
+    "4": {
+      "forward": 0.0163,
+      "backward": 0.0357,
+      "params_bytes": 25204736,
+      "mem_required": 1346456166.4,
+      "output_activation": 16777216.0
+    },
+    "2": {
+      "forward": 0.0089,
+      "backward": 0.0186,
+      "params_bytes": 25204736,
+      "mem_required": 708840038.4,
+      "output_activation": 8388608.0
+    }
+  },
+  "20": {
+    "1": {
+      "forward": 0.0049,
+      "backward": 0.0095,
+      "params_bytes": 25204736,
+      "mem_required": 390031974.4,
+      "output_activation": 4194304.0
+    },
+    "4": {
+      "forward": 0.0163,
+      "backward": 0.0357,
+      "params_bytes": 25204736,
+      "mem_required": 1346456166.4,
+      "output_activation": 16777216.0
+    },
+    "2": {
+      "forward": 0.0089,
+      "backward": 0.0186,
+      "params_bytes": 25204736,
+      "mem_required": 708840038.4,
+      "output_activation": 8388608.0
+    }
+  },
+  "21": {
+    "1": {
+      "forward": 0.0049,
+      "backward": 0.0095,
+      "params_bytes": 25204736,
+      "mem_required": 390031974.4,
+      "output_activation": 4194304.0
+    },
+    "4": {
+      "forward": 0.0163,
+      "backward": 0.0357,
+      "params_bytes": 25204736,
+      "mem_required": 1346456166.4,
+      "output_activation": 16777216.0
+    },
+    "2": {
+      "forward": 0.0089,
+      "backward": 0.0186,
+      "params_bytes": 25204736,
+      "mem_required": 708840038.4,
+      "output_activation": 8388608.0
+    }
+  },
+  "22": {
+    "1": {
+      "forward": 0.0049,
+      "backward": 0.0095,
+      "params_bytes": 25204736,
+      "mem_required": 390031974.4,
+      "output_activation": 4194304.0
+    },
+    "4": {
+      "forward": 0.0163,
+      "backward": 0.0357,
+      "params_bytes": 25204736,
+      "mem_required": 1346456166.4,
+      "output_activation": 16777216.0
+    },
+    "2": {
+      "forward": 0.0089,
+      "backward": 0.0186,
+      "params_bytes": 25204736,
+      "mem_required": 708840038.4,
+      "output_activation": 8388608.0
+    }
+  },
+  "23": {
+    "1": {
+      "forward": 0.0049,
+      "backward": 0.0095,
+      "params_bytes": 25204736,
+      "mem_required": 390031974.4,
+      "output_activation": 4194304.0
+    },
+    "4": {
+      "forward": 0.0163,
+      "backward": 0.0357,
+      "params_bytes": 25204736,
+      "mem_required": 1346456166.4,
+      "output_activation": 16777216.0
+    },
+    "2": {
+      "forward": 0.0089,
+      "backward": 0.0186,
+      "params_bytes": 25204736,
+      "mem_required": 708840038.4,
+      "output_activation": 8388608.0
+    }
+  },
+  "24": {
+    "1": {
+      "forward": 0.0049,
+      "backward": 0.0095,
+      "params_bytes": 25204736,
+      "mem_required": 390031974.4,
+      "output_activation": 4194304.0
+    },
+    "4": {
+      "forward": 0.0163,
+      "backward": 0.0357,
+      "params_bytes": 25204736,
+      "mem_required": 1346456166.4,
+      "output_activation": 16777216.0
+    },
+    "2": {
+      "forward": 0.0089,
+      "backward": 0.0186,
+      "params_bytes": 25204736,
+      "mem_required": 708840038.4,
+      "output_activation": 8388608.0
+    }
+  },
+  "25": {
+    "1": {
+      "forward": 0.009300000000000001,
+      "backward": 0.015300000000000001,
+      "params_bytes": 103292928,
+      "mem_required": 610759270.4,
+      "output_activation": 103284738.0
+    },
+    "4": {
+      "forward": 0.0369,
+      "backward": 0.0595,
+      "params_bytes": 103292928,
+      "mem_required": 1890706841.6,
+      "output_activation": 413138952.0
+    },
+    "2": {
+      "forward": 0.019299999999999998,
+      "backward": 0.0313,
+      "params_bytes": 103292928,
+      "mem_required": 1030582886.4,
+      "output_activation": 206569476.0
+    }
+  }
+}

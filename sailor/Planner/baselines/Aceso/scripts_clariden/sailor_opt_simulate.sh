@@ -1,0 +1,21 @@
+#! /bin/bash
+ROOT_PATH=$(pwd)
+model_name=OPT-350
+validation_dir=aceso_validation_clariden
+
+#### Paths ####
+RESULT_PATH=${ROOT_PATH}/${validation_dir}/
+LOG_PATH=${RESULT_PATH}sailor/${model_name}/
+CONFIG_SAVE_PATH=${RESULT_PATH}configs/
+mkdir -p ${LOG_PATH}
+
+for file_name in $(ls $CONFIG_SAVE_PATH)
+do
+    config_name=`basename $file_name .json`
+    python sailor_simulate_plan.py --gpu_type GH-96 \
+        --basic_cluster_config_json ../../simulations/tests/basic_cluster_config.json \
+        --training_config_json ../../simulations/tests/training_config_opt_350.json \
+        --simulator_profile_file ../../simulations/profiles_tmp_aceso.json \
+        --plan_path $CONFIG_SAVE_PATH${file_name} \
+        2>&1 | tee ${LOG_PATH}sailor_${config_name}.log
+done
