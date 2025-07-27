@@ -46,6 +46,8 @@ COPY deepspeed/groups.py /usr/local/lib/python3.10/dist-packages/deepspeed/utils
 COPY deepspeed/p2p.py /usr/local/lib/python3.10/dist-packages/deepspeed/runtime/pipe/p2p.py
 COPY deepspeed/topology.py /usr/local/lib/python3.10/dist-packages/deepspeed/runtime/pipe/topology.py
 COPY deepspeed/utils.py /usr/local/lib/python3.10/dist-packages/deepspeed/runtime/
+COPY deepspeed/module.py /usr/local/lib/python3.10/dist-packages/deepspeed/runtime/pipe/module.py
+
 
 WORKDIR /root/sailor/third_party/Megatron-DeepSpeed
 RUN python -c 'from datasets import load_dataset; ds = load_dataset("stas/oscar-en-10k", split="train", keep_in_memory=False); ds.to_json(f"data/oscar-en-10k.jsonl", orient="records", lines=True, force_ascii=False)'

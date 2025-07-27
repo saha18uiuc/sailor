@@ -28,7 +28,7 @@ from torch import nn
 import torch.nn.functional as F
 
 
-def model_provider(pre_process=True, post_process=True, use_embedding=True, use_transformer=True, use_last=True):
+def model_provider(pre_process=True, post_process=True, use_embedding=True, use_transformer=True, use_last=True, layers_per_stage=None):
     """Build the model."""
 
     print_rank_0('building GPT model ...')
@@ -61,7 +61,8 @@ def model_provider(pre_process=True, post_process=True, use_embedding=True, use_
                     parallel_output=True,
                     use_embedding=use_embedding,
                     use_transformer=use_transformer,
-                    use_last=use_last
+                    use_last=use_last,
+                    layers_per_stage=layers_per_stage
                 )
             elif args.model_name == "LLAMA":
                 model = LlamaModelPipe(
@@ -69,7 +70,8 @@ def model_provider(pre_process=True, post_process=True, use_embedding=True, use_
                     parallel_output=True,
                     use_embedding=use_embedding,
                     use_transformer=use_transformer,
-                    use_last=use_last
+                    use_last=use_last,
+                    layers_per_stage=layers_per_stage
                 )
             elif args.model_name == "GPT-Neo":
                 model = GPTNeoModelPipe(
@@ -78,7 +80,8 @@ def model_provider(pre_process=True, post_process=True, use_embedding=True, use_
                     parallel_output=True,
                     use_embedding=use_embedding,
                     use_transformer=use_transformer,
-                    use_last=use_last
+                    use_last=use_last,
+                    layers_per_stage=layers_per_stage
                 )
             # This is a hack to give us a reference to get_batch_pipe from within training.py
             # We need to call model.set_batch_fn after deepspeed.initialize

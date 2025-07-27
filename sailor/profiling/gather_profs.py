@@ -4,6 +4,7 @@ import glob
 from os.path import expanduser
 from pathlib import Path
 import argparse
+import os
 
 def gather_profiles(profile_dir, gpu_type):
     all_profs_dict = {}
@@ -14,15 +15,15 @@ def gather_profiles(profile_dir, gpu_type):
 
     smallest_tmp=str(8)
     for file in glob.glob(f"{profile_dir}/*.json"):
-        filename = file.split(".")[0]
+        filename = os.path.basename(file)
         filename_tokens = filename.split("_")
         tmp = filename_tokens[-2]
         smallest_tmp = min(smallest_tmp, tmp)
+        print(tmp, smallest_tmp)
 
     for file in glob.glob(f"{profile_dir}/*.json"):
-        print(file)
-        filename = file.split(".")[0]
-        filename_tokens = filename.split("_")
+        filename = os.path.basename(file)
+        filename_tokens = filename.split(".")[0].split("_")
         tmp = filename_tokens[-2]
         mbs = filename_tokens[-1]
 
