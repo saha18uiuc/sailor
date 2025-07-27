@@ -209,6 +209,7 @@ def generate_profile_Varuna(timing_info, mem_info, num_layers, gpus_per_node, ac
                 layer_dict[mbs] = {}
         profile_dict[layer] = layer_dict
 
+    print(profile_dict)
     return profile_dict
 
 

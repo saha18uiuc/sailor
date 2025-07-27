@@ -2,7 +2,7 @@ import os
 import argparse
 
 def main(args):
-    for i in range(26, 31):
+    for i in range(16, 31):
         num_bytes = pow(2,i)
         print(f"-------------- Run with {num_bytes} bytes")
         cmd = f"python test_sendrecv.py --rank {args.rank} --master_ip {args.master_ip} --gpus_per_node {args.gpus_per_node} --world_size {args.world_size} --data_size {num_bytes} --num_runs 50"

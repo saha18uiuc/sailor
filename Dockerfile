@@ -13,8 +13,8 @@ RUN pip install google-cloud-container==2.31.0
 RUN pip install protobuf==3.19.5
 RUN pip install cupy-cuda12x
 RUN pip install wandb
-RUN pip install datasets
-RUN pip install transformers
+RUN pip install datasets==3.5.0
+RUN pip install transformers==4.51.0
 RUN pip install skypilot[gcp]
 RUN pip install google-api-python-client
 RUN pip install einops
@@ -54,7 +54,7 @@ RUN python -c 'from datasets import load_dataset; ds = load_dataset("stas/oscar-
 RUN python tools/preprocess_data.py --input data/oscar-en-10k.jsonl --output-prefix data/meg-gpt2-oscar-en-10k --dataset-impl mmap --tokenizer-type GPT2BPETokenizer --merge-file data/gpt2-merges.txt --vocab-file data/gpt2-vocab.json --append-eod --workers 4
 
 # for FlashFlex
-RUN pip install pyomo evaluate accelerate pymetis
+RUN pip install pyomo evaluate accelerate pymetis==2023.1.1
 
 WORKDIR /root/sailor
 RUN python3 -m pip install -e .
