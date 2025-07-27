@@ -1,0 +1,70 @@
+CMD LoadMicroBatch(buffer_id=0) took 0.128004789352417 sec
+CMD ForwardPass(buffer_id=0) took 0.18452763557434082 sec
+CMD BackwardPass(buffer_id=0) took 0.03425288200378418 sec
+CMD ReduceTiedGrads() took 3.361701965332031e-05 sec
+CMD ReduceGrads() took 2.1696090698242188e-05 sec
+CMD OptimizerStep() took 1.8835067749023438e-05 sec
+Iteration took 0.3481123447418213 sec
+CMD LoadMicroBatch(buffer_id=0) took 0.0008230209350585938 sec
+CMD ForwardPass(buffer_id=0) took 0.009428977966308594 sec
+CMD BackwardPass(buffer_id=0) took 0.016125202178955078 sec
+CMD ReduceTiedGrads() took 2.0265579223632812e-05 sec
+CMD ReduceGrads() took 1.621246337890625e-05 sec
+CMD OptimizerStep() took 1.52587890625e-05 sec
+Iteration took 0.027054309844970703 sec
+CMD LoadMicroBatch(buffer_id=0) took 0.0005896091461181641 sec
+CMD ForwardPass(buffer_id=0) took 0.00888967514038086 sec
+CMD BackwardPass(buffer_id=0) took 0.016128063201904297 sec
+CMD ReduceTiedGrads() took 2.1219253540039062e-05 sec
+CMD ReduceGrads() took 1.5735626220703125e-05 sec
+CMD OptimizerStep() took 1.4781951904296875e-05 sec
+Iteration took 0.02621173858642578 sec
+CMD LoadMicroBatch(buffer_id=0) took 0.0006220340728759766 sec
+CMD ForwardPass(buffer_id=0) took 0.009151458740234375 sec
+CMD BackwardPass(buffer_id=0) took 0.016205787658691406 sec
+CMD ReduceTiedGrads() took 1.9788742065429688e-05 sec
+CMD ReduceGrads() took 1.4543533325195312e-05 sec
+CMD OptimizerStep() took 1.5974044799804688e-05 sec
+Iteration took 0.026652812957763672 sec
+CMD LoadMicroBatch(buffer_id=0) took 0.0005156993865966797 sec
+CMD ForwardPass(buffer_id=0) took 0.00951528549194336 sec
+CMD BackwardPass(buffer_id=0) took 0.01611924171447754 sec
+CMD ReduceTiedGrads() took 1.9311904907226562e-05 sec
+CMD ReduceGrads() took 1.5020370483398438e-05 sec
+CMD OptimizerStep() took 1.4543533325195312e-05 sec
+Iteration took 0.02677154541015625 sec
+CMD LoadMicroBatch(buffer_id=0) took 0.0006725788116455078 sec
+CMD ForwardPass(buffer_id=0) took 0.008993148803710938 sec
+CMD BackwardPass(buffer_id=0) took 0.01610875129699707 sec
+CMD ReduceTiedGrads() took 1.9550323486328125e-05 sec
+CMD ReduceGrads() took 1.5020370483398438e-05 sec
+CMD OptimizerStep() took 1.4543533325195312e-05 sec
+Iteration took 0.026374101638793945 sec
+CMD LoadMicroBatch(buffer_id=0) took 0.0006210803985595703 sec
+CMD ForwardPass(buffer_id=0) took 0.009348392486572266 sec
+CMD BackwardPass(buffer_id=0) took 0.01611185073852539 sec
+CMD ReduceTiedGrads() took 1.8835067749023438e-05 sec
+CMD ReduceGrads() took 1.6450881958007812e-05 sec
+CMD OptimizerStep() took 1.430511474609375e-05 sec
+Iteration took 0.02668619155883789 sec
+CMD LoadMicroBatch(buffer_id=0) took 0.0006330013275146484 sec
+CMD ForwardPass(buffer_id=0) took 0.008796453475952148 sec
+CMD BackwardPass(buffer_id=0) took 0.015644550323486328 sec
+CMD ReduceTiedGrads() took 1.9788742065429688e-05 sec
+CMD ReduceGrads() took 1.52587890625e-05 sec
+CMD OptimizerStep() took 1.4781951904296875e-05 sec
+Iteration took 0.02568507194519043 sec
+CMD LoadMicroBatch(buffer_id=0) took 0.0005939006805419922 sec
+CMD ForwardPass(buffer_id=0) took 0.00898289680480957 sec
+CMD BackwardPass(buffer_id=0) took 0.015442371368408203 sec
+CMD ReduceTiedGrads() took 2.002716064453125e-05 sec
+CMD ReduceGrads() took 1.52587890625e-05 sec
+CMD OptimizerStep() took 1.4543533325195312e-05 sec
+Iteration took 0.025629043579101562 sec
+CMD LoadMicroBatch(buffer_id=0) took 0.0006127357482910156 sec
+CMD ForwardPass(buffer_id=0) took 0.008754968643188477 sec
+CMD BackwardPass(buffer_id=0) took 0.015467643737792969 sec
+CMD ReduceTiedGrads() took 1.9550323486328125e-05 sec
+CMD ReduceGrads() took 1.5974044799804688e-05 sec
+CMD OptimizerStep() took 1.3828277587890625e-05 sec
+Iteration took 0.025457143783569336 sec

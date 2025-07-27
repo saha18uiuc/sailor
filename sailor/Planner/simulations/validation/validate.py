@@ -202,7 +202,7 @@ if __name__ == "__main__":
     with open(args.training_config_json, 'r') as f:
         training_config = json.load(f)
 
-    with open(f"{args.sailor_path}/elastic-spot-ml/sailor/Planner/llm_info.json", 'r') as f:
+    with open(f"{args.sailor_path}/sailor/sailor/Planner/llm_info.json", 'r') as f:
         llm_info = json.load(f)
 
     with open(args.basic_cluster_config_json, 'r') as f:

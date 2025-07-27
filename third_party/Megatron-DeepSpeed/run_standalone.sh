@@ -1,0 +1,40 @@
+#!/bin/bash
+
+python train_llm.py \
+    --tensor-model-parallel-size 1 \
+    --pipeline-model-parallel-size 1 \
+    --data-parallel-size 1 \
+    --num-layers 24 \
+    --num-transformer-layers-original 24 \
+    --hidden-size 512 \
+    --num-attention-heads 16 \
+    --seq-length 2048 \
+    --loss-scale 12 \
+    --max-position-embeddings 2048 \
+    --micro-batch-size 1 \
+    --lr 6.0e-5 \
+    --min-lr 6.0e-6 \
+    --lr-decay-style cosine \
+    --log-interval 1 \
+    --eval-iters 40 \
+    --eval-interval 1000 \
+    --data-path /root/sailor/third_party/Megatron-DeepSpeed/data/meg-gpt2-oscar-en-10k_text_document \
+    --vocab-file /root/sailor/third_party/Megatron-DeepSpeed/data/gpt2-vocab.json \
+    --merge-file /root/sailor/third_party/Megatron-DeepSpeed/data/gpt2-merges.txt \
+    --save-interval 1000 \
+    --split 98,2,0 \
+    --clip-grad 1.0 \
+    --weight-decay 0.1 \
+    --adam-beta1 0.9 \
+    --adam-beta2 0.95 \
+    --init-method-std 0.006 \
+    --deepspeed \
+    --deepspeed_config ds_config.json \
+    --model-name OPT \
+    --gpu-type RTX \
+    --train-iters 100 \
+    --results-dir tests \
+    --rank 0 \
+    --world_size 1 \
+    --master_ip 127.0.0.1 \
+    --master_port 1234

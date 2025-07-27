@@ -256,16 +256,16 @@ def evaluate(args):
 
     # operator level info
     if args.planner in ["Aceso"]:
-        with open(f"{args.sailor_path}/elastic-spot-ml/sailor/Planner/llm_info_aceso.json", 'r') as f:
+        with open(f"{args.sailor_path}/sailor/sailor/Planner/llm_info_aceso.json", 'r') as f:
             llm_info = json.load(f)
             op_simulator = True
     elif args.planner in ["nnScaler"]:
-        with open(f"{args.sailor_path}/elastic-spot-ml/sailor/Planner/llm_info_nnscaler.json", 'r') as f:
+        with open(f"{args.sailor_path}/sailor/sailor/Planner/llm_info_nnscaler.json", 'r') as f:
             llm_info = json.load(f)
             op_simulator = True
     # layer level info
     else:
-        with open(f"{args.sailor_path}/elastic-spot-ml/sailor/Planner/llm_info.json", 'r') as f:
+        with open(f"{args.sailor_path}/sailor/sailor/Planner/llm_info.json", 'r') as f:
             llm_info = json.load(f)
             op_simulator = False
 

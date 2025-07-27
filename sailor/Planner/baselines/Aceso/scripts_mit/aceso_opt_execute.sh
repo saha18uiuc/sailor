@@ -15,7 +15,7 @@ TRAIN_ITERS=10
 model_name=OPT-350
 
 
-ROOT_PATH=/root/elastic-spot-ml/sailor/Planner/baselines/Aceso
+ROOT_PATH=/root/sailor/sailor/Planner/baselines/Aceso
 
 # SYNC
 export MASTER_PORT=1234
@@ -64,7 +64,7 @@ CMD=" \
     --lr-warmup-fraction .01 \
     --log-interval 1 \
     --DDP-impl local \
-    --log-path $LOG_PATH 
+    --log-path $LOG_PATH
 "
 
 cd $ROOT_PATH

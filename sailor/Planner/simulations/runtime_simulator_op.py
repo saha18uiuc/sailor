@@ -98,7 +98,7 @@ class SimulatorOP():
 
         # single-zone
         home = expanduser("~")
-        with open(f'{home}/elastic-spot-ml/sailor/providers/gcp/network_coeffs.json', 'r') as f:
+        with open(f'{home}/sailor/sailor/providers/gcp/network_coeffs.json', 'r') as f:
             network_coeffs_dict = json.load(f)["inter"]
 
         self.network_coeffs = {}

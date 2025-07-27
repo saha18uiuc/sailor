@@ -9,7 +9,7 @@ from sailor.Planner.simulations.constants import GPU_PRICES
 class GalvatronPlanner(BaselinePlanner):
     def __init__(self, training_config, planner_config_dict, objective):
         super().__init__()
-        path = "/home/fstrati/elastic-spot-ml/sailor/Planner/baselines/Galvatron/test"
+        path = "/home/fstrati/sailor/sailor/Planner/baselines/Galvatron/test"
         with open(training_config, 'r') as f:
             config = json.load(f)
 

@@ -88,7 +88,7 @@ def get_p2p_bw(world_size, network_coeffs):
 def get_hw_prof_galvatron(max_num_nodes, gpus_per_node, network_coeffs, intra_network_coeffs, gpu_type):
     comm_prof = {}
 
-    with open(f"{expanduser('~')}/elastic-spot-ml/sailor/Planner/baselines/Galvatron/overlap_coe_dicts.json", 'r') as f:
+    with open(f"{expanduser('~')}/sailor/sailor/Planner/baselines/Galvatron/overlap_coe_dicts.json", 'r') as f:
         galvatron_overlap_coe_dict = json.load(f)
 
     for num_gpus in range(2, max_num_nodes+1):
@@ -487,7 +487,7 @@ def main(args):
         profile = generate_profile_Varuna(timing_info, mem_info, args.num_layers, args.gpus_per_node, args.extra_mem_file)
     elif args.planner == "AMP":
         profiles = generate_profile_AMP(timing_info, args.num_layers)
-        par_dir = f'{home_dir}/elastic-spot-ml/sailor/Planner/baselines/AMP/profiles/{args.model}/{args.gpu_type}'
+        par_dir = f'{home_dir}/sailor/sailor/Planner/baselines/AMP/profiles/{args.model}/{args.gpu_type}'
         Path(par_dir).mkdir(parents=True, exist_ok=True)
         for tmp, sim_list in profiles.items():
             with open(f"{par_dir}/profile_{tmp}.npy", 'wb') as f:
@@ -498,7 +498,7 @@ def main(args):
         profile = generate_profile_Piper(timing_info, mem_info, args.num_layers, args.gpu_type, args.model)
     elif args.planner == "Metis":
         profile = generate_profile_Metis(timing_info, mem_info, args.num_layers, max_bw, args.gpu_type, args.model, args.optimizer, args.fp_size)
-        par_dir = f'{home_dir}/elastic-spot-ml/sailor/Planner/baselines/Metis/profiles/{args.model}/{args.gpu_type}'
+        par_dir = f'{home_dir}/sailor/sailor/Planner/baselines/Metis/profiles/{args.model}/{args.gpu_type}'
         Path(par_dir).mkdir(parents=True, exist_ok=True)
         for mbs, mbs_prof in profile.items():
             for tmp, prof in mbs_prof.items():
@@ -508,7 +508,7 @@ def main(args):
     elif args.planner == "Galvatron":
         profile = generate_profile_Galvatron(timing_info, mem_info, args.max_num_nodes,
                                              args.gpus_per_node, network_coeffs_inter_spec, network_coeffs_intra_spec, args.gpu_type)
-        par_dir = f'{home_dir}/elastic-spot-ml/sailor/Planner/baselines/Galvatron/profiles/{args.model}/{args.gpu_type}'
+        par_dir = f'{home_dir}/sailor/sailor/Planner/baselines/Galvatron/profiles/{args.model}/{args.gpu_type}'
         Path(par_dir).mkdir(parents=True, exist_ok=True)
         with open(f'{par_dir}/compute_profile.json', 'w') as f:
             json.dump(profile[0], f, indent=2)
@@ -521,7 +521,7 @@ def main(args):
         raise NotImplementedError
 
     if args.planner in ["Varuna", "Oobleck", "Piper"]:
-        par_dir = f'{home_dir}/elastic-spot-ml/sailor/Planner/baselines/{args.planner}/profiles/{args.model}/{args.gpu_type}'
+        par_dir = f'{home_dir}/sailor/sailor/Planner/baselines/{args.planner}/profiles/{args.model}/{args.gpu_type}'
         Path(par_dir).mkdir(parents=True, exist_ok=True)
         if args.planner == "Piper":
             prof_file = f'{par_dir}/profile.json'

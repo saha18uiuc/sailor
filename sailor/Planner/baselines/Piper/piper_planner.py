@@ -23,11 +23,11 @@ class PiperPlanner(BaselinePlanner):
         home_dir = os.environ.get('SAILOR_PATH')
 
         self.profile = self.profile["1"] # Piper assumes Mbs is given, so we always assume mbs=1
-        self.piper_algo_path = f"{home_dir}/elastic-spot-ml/sailor/Planner/baselines/Piper/src"
+        self.piper_algo_path = f"{home_dir}/sailor/sailor/Planner/baselines/Piper/src"
         compile_cmd = "rm -rf algo.bin && g++ -O3 algo.cpp -ljsoncpp  -o algo.bin"
         os.system(f"cd {self.piper_algo_path} && {compile_cmd}")
 
-        network_coeff_path = f"{home_dir}/elastic-spot-ml/sailor/providers/gcp/multizone_bandwidths_het.json"
+        network_coeff_path = f"{home_dir}/sailor/sailor/providers/gcp/multizone_bandwidths_het.json"
         with open(network_coeff_path, 'r') as f:
             self.network_profile = json.load(f)
 

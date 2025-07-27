@@ -7,7 +7,7 @@ from sailor.Planner.baselines.Varuna.auto_config import AutoConfig
 class VarunaSimulator():
     def __init__(self, profile_file: str, cluster_config: dict, training_config: dict) -> None:
         home_dir = os.environ.get('SAILOR_PATH')
-        varuna_simulator_path = f"{home_dir}/elastic-spot-ml/sailor/Planner/baselines/Varuna/simulator"
+        varuna_simulator_path = f"{home_dir}/sailor/sailor/Planner/baselines/Varuna/simulator"
         #if not os.path.exists(f"{varuna_simulator_path}/simulate-varuna"):
         compile_cmd = "rm -rf simulate-varuna.bin && g++ -std=c++11 simulate-varuna-main.cc generate_schedule.cc simulate-varuna.cc -o simulate-varuna.bin"
         os.system(f"cd {varuna_simulator_path} && {compile_cmd}")

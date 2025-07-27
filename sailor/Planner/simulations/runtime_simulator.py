@@ -193,15 +193,15 @@ class Simulator():
 
         # inter-node
         self.inter_network_coeffs = InterNodeNetworkInfo(
-            f'{sailor_path}/elastic-spot-ml/sailor/providers/gcp/multizone_bandwidths_het.json')
+            f'{sailor_path}/sailor/sailor/providers/gcp/multizone_bandwidths_het.json')
 
-        with open(f'{sailor_path}/elastic-spot-ml/sailor/providers/gcp/intra_node_bandwidths.json', 'r') as f:
+        with open(f'{sailor_path}/sailor/sailor/providers/gcp/intra_node_bandwidths.json', 'r') as f:
             intra_network_coeffs_dict = json.load(f)
         self.intra_network_coeffs = {}
         for gpu_type, coeffs_per_gpu in intra_network_coeffs_dict.items():
             for num_gpus, coeffs in coeffs_per_gpu.items():
                 self.intra_network_coeffs[(gpu_type, int(num_gpus))] = coeffs
-        with open(f'{sailor_path}/elastic-spot-ml/sailor/providers/gcp/communication_cost.json', 'r') as f:
+        with open(f'{sailor_path}/sailor/sailor/providers/gcp/communication_cost.json', 'r') as f:
             self.communication_cost = json.load(f)
 
 

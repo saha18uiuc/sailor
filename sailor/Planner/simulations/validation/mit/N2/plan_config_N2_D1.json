@@ -4,14 +4,17 @@
         {
             "num_stages": 2,
             "layers_per_stage": [[0,1,2,3,4,5,6,7,8,9,10,11],[12,13,14,15,16,17,18,19,20,21,22,23,24,25]],
-            "tmp_per_stage": [[[[["Titan-RTX", 4,"us-central1-a"]],4]], [[[["RTX-2080", 4,"us-central1-a"]],4]]],
+            "tmp_per_stage": [
+                [[[["RTX-3090", 2,"us-central1-a"]],2]],
+                [[[["Titan-RTX", 2,"us-central1-a"]],2]]
+            ],
             "dp": [1,1]
         }
     ],
-    "mbs": 1,
-    "gbs": 64,
-    "real": 17.09677,
-    "red_grads": 0.00494,
+    "mbs": 2,
+    "gbs": 256,
+    "real": 119.83914,
+    "red_grads": 0.00788,
     "max_mem": 4130340864,
     "N": 2
 }

@@ -16,7 +16,7 @@ class VarunaPlanner(BaselinePlanner):
         # compile Varuna simulator if not already there
         home_dir = os.environ.get('SAILOR_PATH')
 
-        varuna_simulator_path = f"{home_dir}/elastic-spot-ml/sailor/Planner/baselines/Varuna/simulator"
+        varuna_simulator_path = f"{home_dir}/sailor/sailor/Planner/baselines/Varuna/simulator"
         compile_cmd = "rm -rf simulate-varuna.bin && g++ -std=c++11 simulate-varuna-main.cc generate_schedule.cc simulate-varuna.cc -o simulate-varuna.bin"
         os.system(f"cd {varuna_simulator_path} && {compile_cmd}")
 

@@ -68,24 +68,24 @@ if __name__ == "__main__":
     print(mem_info_dict)
 
     # # # SAILOR, timing
-    par_dir = f'{home_dir}/elastic-spot-ml/sailor/Planner/sailor_planner/profiles/{model_name}/{gpu_type}'
+    par_dir = f'{home_dir}/sailor/sailor/Planner/sailor_planner/profiles/{model_name}/{gpu_type}'
     Path(par_dir).mkdir(parents=True, exist_ok=True)
     with open(f'{par_dir}/profile.json', 'w') as f:
          json.dump(all_profs_dict, f, indent=2)
 
     # # memory
-    with open(f'{home_dir}/elastic-spot-ml/sailor/Planner/llm_info.json', 'r') as f:
+    with open(f'{home_dir}/sailor/sailor/Planner/llm_info.json', 'r') as f:
         all_mem_info = json.load(f)
 
-    with open(f'{home_dir}/elastic-spot-ml/sailor/Planner/llm_info.json', 'w') as f:
+    with open(f'{home_dir}/sailor/sailor/Planner/llm_info.json', 'w') as f:
         all_mem_info[model_name] = mem_info_dict
         json.dump(all_mem_info, f, indent=2)
 
     # # # simulations, timing
-    with open(f'{home_dir}/elastic-spot-ml/sailor/Planner/simulations/profiles_tmp.json', 'r') as f:
+    with open(f'{home_dir}/sailor/sailor/Planner/simulations/profiles_tmp.json', 'r') as f:
         all_sim_dict = json.load(f)
 
-    with open(f'{home_dir}/elastic-spot-ml/sailor/Planner/simulations/profiles_tmp.json', 'w') as f:
+    with open(f'{home_dir}/sailor/sailor/Planner/simulations/profiles_tmp.json', 'w') as f:
         if model_name not in all_sim_dict:
             all_sim_dict[model_name] = {}
         all_sim_dict[model_name][gpu_type] = sim_dict

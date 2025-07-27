@@ -12,10 +12,10 @@ class AMPSimulator():
         self.training_config = copy.deepcopy(training_config_or)
 
         home_dir = os.environ.get('SAILOR_PATH')
-        with open(f'{home_dir}/elastic-spot-ml/sailor/providers/gcp/multizone_bandwidths_het.json', 'r') as f:
+        with open(f'{home_dir}/sailor/sailor/providers/gcp/multizone_bandwidths_het.json', 'r') as f:
             self.network_info = json.load(f)
 
-        with open(f'{home_dir}/elastic-spot-ml/sailor/Planner/llm_info.json') as f:
+        with open(f'{home_dir}/sailor/sailor/Planner/llm_info.json') as f:
             self.llm_info = json.load(f)
 
         self.global_batch_size = self.training_config['global_batch_size']

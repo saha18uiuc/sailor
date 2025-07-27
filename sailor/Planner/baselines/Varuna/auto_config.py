@@ -42,7 +42,7 @@ class AutoConfig:
         #             return
 
         home_dir = os.environ.get('SAILOR_PATH')
-        with open(f'{home_dir}/elastic-spot-ml/sailor/providers/gcp/multizone_bandwidths_het.json', 'r') as f:
+        with open(f'{home_dir}/sailor/sailor/providers/gcp/multizone_bandwidths_het.json', 'r') as f:
             self.network_coeffs = json.load(f)
 
         self.network_coeffs = self.network_coeffs[zone][gpu_type][str(gpus_per_vm)][zone][gpu_type][str(gpus_per_vm)][0]
@@ -146,7 +146,7 @@ class AutoConfig:
     def get_simulated_time(self, pp_size, num_microbatches, send_time,
                            long_send_time, alr, verbose=False):
         home_dir = os.environ.get('SAILOR_PATH')
-        tools_dir = f"{home_dir}/elastic-spot-ml/sailor/Planner/baselines/Varuna"
+        tools_dir = f"{home_dir}/sailor/sailor/Planner/baselines/Varuna"
         sim_binary = os.path.join(tools_dir, "simulator", "simulate-varuna.bin")
         # TODO: use C++ extension for python?
         command = f"GPUS_PER_VM={self.gpus_per_vm} {sim_binary} " + \

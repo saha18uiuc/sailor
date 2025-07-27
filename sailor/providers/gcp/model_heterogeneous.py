@@ -63,6 +63,6 @@ def model(input_file, output_file):
         json.dump(new_data, f, indent=2)
 
 if __name__ == "__main__":
-    input_file = f'{expanduser("~")}/elastic-spot-ml/sailor/providers/gcp/multizone_bandwidths.json'
-    output_file = f'{expanduser("~")}/elastic-spot-ml/sailor/providers/gcp/multizone_bandwidths_het.json'
+    input_file = f'{expanduser("~")}/sailor/sailor/providers/gcp/multizone_bandwidths.json'
+    output_file = f'{expanduser("~")}/sailor/sailor/providers/gcp/multizone_bandwidths_het.json'
     model(input_file, output_file)

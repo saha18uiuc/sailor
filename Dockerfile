@@ -18,12 +18,11 @@ RUN pip install transformers
 RUN pip install skypilot[gcp]
 RUN pip install google-api-python-client
 RUN pip install einops
-RUN pip install deepspeed
+RUN pip install deepspeed==0.16.5
 RUN pip install nltk
 
 WORKDIR /root
 
-# for SAILOR
 RUN apt-get update
 RUN apt-get -y install python3.10-dev iproute2 libjsoncpp-dev python3-pybind11
 
@@ -33,14 +32,9 @@ RUN rm -rf /usr/local/lib/python3.10/dist-packages/pydantic*
 RUN rm -rf /usr/local/lib/python3.10/dist-packages/annotated_types*
 RUN pip install pydantic
 
-COPY ./sailor/ ./elastic-spot-ml/sailor
-COPY ./setup.py ./elastic-spot-ml/setup.py
-COPY ./sailor/Planner/baselines/Oobleck/sympy_tools.py /opt/conda/lib/python3.10/site-packages/pyomo/core/expr/
-COPY ./third_party ./elastic-spot-ml/third_party
-COPY ./scripts ./elastic-spot-ml/scripts
-COPY ./install_baselines.sh ./elastic-spot-ml/install_baselines.sh
+COPY . ./sailor
 
-WORKDIR /root/elastic-spot-ml/
+WORKDIR /root/sailor/
 RUN bash install_baselines.sh
 
 # deepspeed
@@ -53,18 +47,12 @@ COPY deepspeed/p2p.py /usr/local/lib/python3.10/dist-packages/deepspeed/runtime/
 COPY deepspeed/topology.py /usr/local/lib/python3.10/dist-packages/deepspeed/runtime/pipe/topology.py
 COPY deepspeed/utils.py /usr/local/lib/python3.10/dist-packages/deepspeed/runtime/
 
-WORKDIR /root/elastic-spot-ml/third_party/Megatron-DeepSpeed
+WORKDIR /root/sailor/third_party/Megatron-DeepSpeed
 RUN python -c 'from datasets import load_dataset; ds = load_dataset("stas/oscar-en-10k", split="train", keep_in_memory=False); ds.to_json(f"data/oscar-en-10k.jsonl", orient="records", lines=True, force_ascii=False)'
 RUN python tools/preprocess_data.py --input data/oscar-en-10k.jsonl --output-prefix data/meg-gpt2-oscar-en-10k --dataset-impl mmap --tokenizer-type GPT2BPETokenizer --merge-file data/gpt2-merges.txt --vocab-file data/gpt2-vocab.json --append-eod --workers 4
 
-# for Oobleck and FlashFlex
+# for FlashFlex
 RUN pip install pyomo evaluate accelerate pymetis
 
-WORKDIR /root/elastic-spot-ml/sailor/Planner/baselines/nnScaler
-RUN python3 -m pip install -e .
-RUN python3 -m pip install -e cupilot
-
-WORKDIR /root
-COPY ./setup.py ./elastic-spot-ml/setup.py
-WORKDIR elastic-spot-ml
+WORKDIR /root/sailor
 RUN python3 -m pip install -e .

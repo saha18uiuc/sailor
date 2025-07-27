@@ -7,9 +7,9 @@ def test_planner():
     home_dir = expanduser("~")
 
     planner = SailorPlanner(
-        profile_file=f"{home_dir}/elastic-spot-ml/sailor/Planner/sailor_planner/profiles/OPT-350/",
-        training_config_path= f"{home_dir}/elastic-spot-ml/sailor/Planner/simulations/tests/training_config_opt_350.json",
-        quotas_path_dict=f"{home_dir}/elastic-spot-ml/sailor/Planner/sailor_planner/dummy_quotas_dict.json",
+        profile_file=f"{home_dir}/sailor/sailor/Planner/sailor_planner/profiles/OPT-350/",
+        training_config_path= f"{home_dir}/sailor/sailor/Planner/simulations/tests/training_config_opt_350.json",
+        quotas_path_dict=f"{home_dir}/sailor/sailor/Planner/sailor_planner/dummy_quotas_dict.json",
         objective="throughput",
         max_cost=1000,
         min_throughput_percentage=0.1,

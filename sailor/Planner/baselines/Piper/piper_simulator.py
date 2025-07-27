@@ -9,12 +9,12 @@ class PiperSimulator():
             self.profile = json.load(f)
 
         home_dir = os.environ.get('SAILOR_PATH')
-        self.piper_algo_path = f"{home_dir}/elastic-spot-ml/sailor/Planner/baselines/Piper/src"
+        self.piper_algo_path = f"{home_dir}/sailor/sailor/Planner/baselines/Piper/src"
         # if not os.path.exists(f"{self.piper_algo_path}/algo"):
         compile_cmd = "g++ -O3 algo.cpp -ljsoncpp -o algo.bin"
         os.system(f"cd {self.piper_algo_path} && {compile_cmd}")
 
-        network_coeff_path = f"{home_dir}/elastic-spot-ml/sailor/providers/gcp/multizone_bandwidths.json"
+        network_coeff_path = f"{home_dir}/sailor/sailor/providers/gcp/multizone_bandwidths.json"
         with open(network_coeff_path, 'r') as f:
             self.network_profile = json.load(f)
 
