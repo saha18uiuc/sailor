@@ -27,7 +27,7 @@ class PiperPlanner(BaselinePlanner):
         compile_cmd = "rm -rf algo.bin && g++ -O3 algo.cpp -ljsoncpp  -o algo.bin"
         os.system(f"cd {self.piper_algo_path} && {compile_cmd}")
 
-        network_coeff_path = f"{home_dir}/sailor/sailor/providers/gcp/multizone_bandwidths_het.json"
+        network_coeff_path = f"{home_dir}/sailor/sailor/providers/multizone_bandwidths_het.json"
         with open(network_coeff_path, 'r') as f:
             self.network_profile = json.load(f)
 

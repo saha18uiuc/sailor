@@ -64,5 +64,5 @@ def model(input_file, output_file):
 
 if __name__ == "__main__":
     input_file = f'{expanduser("~")}/sailor/sailor/providers/gcp/multizone_bandwidths.json'
-    output_file = f'{expanduser("~")}/sailor/sailor/providers/gcp/multizone_bandwidths_het.json'
+    output_file = f'{expanduser("~")}/sailor/sailor/providers/multizone_bandwidths_het.json'
     model(input_file, output_file)

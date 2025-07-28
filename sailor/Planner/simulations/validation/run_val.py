@@ -25,7 +25,7 @@ if __name__ == "__main__":
 
     for i,file in enumerate(all_files):
         file_path = os.path.join(args.input_path, file)
-        cmd = f"python validate.py --training_config_json {args.training_config_json} --basic_cluster_config_json {args.basic_cluster_config_json} --simulator_profile_path {args.simulator_profile_path} --plan_config_file {file_path} --simulator {args.simulator} --output_path {args.output_path} --sailor_path {args.sailor_path} "
+        cmd = f"python {args.sailor_path}/sailor/sailor/Planner/simulations/validation/validate.py --training_config_json {args.training_config_json} --basic_cluster_config_json {args.basic_cluster_config_json} --simulator_profile_path {args.simulator_profile_path} --plan_config_file {file_path} --simulator {args.simulator} --output_path {args.output_path} --sailor_path {args.sailor_path} "
         if args.simulate_time:
             cmd += "--simulate_time "
         if args.simulate_mem:

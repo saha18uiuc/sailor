@@ -28,7 +28,7 @@ class SailorPlanner():
         os.system(f"cp {lib_path}/libplanner.cpython-310-{arch}-linux-gnu.so {home_dir}/sailor/sailor/Planner/simulations/")
         import libplanner
 
-        network_coeff_path = f"{home_dir}/sailor/sailor/providers/gcp/multizone_bandwidths_het.json"
+        network_coeff_path = f"{home_dir}/sailor/sailor/providers/multizone_bandwidths_het.json"
         model_mem_info = f"{home_dir}/sailor/sailor/Planner/llm_info.json"
         communication_cost_file = f"{home_dir}/sailor/sailor/providers/gcp/communication_cost.json"
 

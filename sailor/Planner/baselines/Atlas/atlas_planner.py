@@ -30,7 +30,7 @@ class AtlasPlanner(BaselinePlanner):
         self.float_size = 2 if fp16 else 4
         sailor_path = os.environ.get('SAILOR_PATH')
 
-        network_path = f'{sailor_path}/sailor/sailor/providers/gcp/multizone_bandwidths_het.json'
+        network_path = f'{sailor_path}/sailor/sailor/providers/multizone_bandwidths_het.json'
         with open(network_path, 'r') as f:
             self.network_coeffs = json.load(f)
 

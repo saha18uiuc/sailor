@@ -30,7 +30,7 @@ class FlashFlexPlanner(BaselinePlanner):
             self.machine_config_dict = json.load(machine_config_file)
 
         home_dir = os.environ.get('SAILOR_PATH')
-        network_path = f'{home_dir}/sailor/sailor/providers/gcp/multizone_bandwidths_het.json'
+        network_path = f'{home_dir}/sailor/sailor/providers/multizone_bandwidths_het.json'
         with open(network_path, 'r') as f:
             self.network_info = json.load(f)
 

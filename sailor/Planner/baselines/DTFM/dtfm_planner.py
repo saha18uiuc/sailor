@@ -11,11 +11,11 @@ class DTFMPlanner(BaselinePlanner):
         super().__init__()
 
         sailor_path = os.environ.get('SAILOR_PATH')
-        network_path = f'{sailor_path}/sailor/sailor/providers/gcp/multizone_bandwidths_het.json'
+        network_path = f'{sailor_path}/sailor/sailor/providers/multizone_bandwidths_het.json'
         with open(network_path, 'r') as f:
             self.network_coeffs = json.load(f)
 
-        intra_network_path = f'{sailor_path}/sailor/sailor/providers/gcp/intra_node_bandwidths.json'
+        intra_network_path = f'{sailor_path}/sailor/sailor/providers/intra_node_bandwidths.json'
         with open(intra_network_path) as f:
             self.intra_network_coeffs = json.load(f)
 

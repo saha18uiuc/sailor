@@ -133,11 +133,8 @@ Generate profiles:
 
 ```bash
 
-If the GPU that
 cd /root/sailor/sailor/profiling/baselines
 bash generate.sh
 ```
 
 Adapt the name of the baseline, GPU type, and number of GPUs per machine accordingly in the file.
-
-## 2. Network profiling

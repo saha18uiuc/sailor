@@ -22,7 +22,7 @@ class MetisSimulator():
         assert len(self.profile_data.keys()) > 0, 'There is no profiled data at the specified path.'
 
         home_dir = os.environ.get('SAILOR_PATH')
-        with open(f"{home_dir}/sailor/sailor/providers/gcp/intra_node_bandwidths.json", 'r') as f:
+        with open(f"{home_dir}/sailor/sailor/providers/intra_node_bandwidths.json", 'r') as f:
             self.intra_network_config = json.load(f)
 
         with open(f"{home_dir}/sailor/sailor/providers/gcp/multizone_bandwidths.json", 'r') as f:

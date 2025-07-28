@@ -42,7 +42,7 @@ class AutoConfig:
         #             return
 
         home_dir = os.environ.get('SAILOR_PATH')
-        with open(f'{home_dir}/sailor/sailor/providers/gcp/multizone_bandwidths_het.json', 'r') as f:
+        with open(f'{home_dir}/sailor/sailor/providers/multizone_bandwidths_het.json', 'r') as f:
             self.network_coeffs = json.load(f)
 
         self.network_coeffs = self.network_coeffs[zone][gpu_type][str(gpus_per_vm)][zone][gpu_type][str(gpus_per_vm)][0]
