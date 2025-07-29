@@ -5,8 +5,7 @@ from os.path import expanduser
 from sailor.Planner.simulations.constants import GPU_MEMORY_GB
 from sailor.Planner.simulations.utils import models
 
-from sailor.Planner.sailor_planner.python_src.utils import calculate_exec_per_stage
-from sailor.Planner.sailor_planner.python_src.utils import partition_uniform
+from sailor.Planner.sailor_planner.utils import partition_uniform
 from sailor.Planner.sailor_planner.constants import MEMORY_BUCKET_DEEPSPEED_SIZE
 from sailor.profiling.profile_utils import estimate_send_time, estimate_ar_time
 

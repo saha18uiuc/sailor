@@ -7,7 +7,7 @@ import math
 import copy
 
 from sailor.Planner.baselines.baseline_planner import BaselinePlanner
-from sailor.Planner.sailor_planner.python_src.utils import partition_sailor
+from sailor.Planner.sailor_planner.utils import partition_sailor
 from sailor.Planner.simulations.constants import GPU_MEMORY_GB
 from sailor.Planner.simulations.runtime_simulator import Simulator
 

@@ -4,7 +4,7 @@ import numpy as np
 
 from sailor.Planner.baselines.baseline_planner import BaselinePlanner
 from sailor.Planner.baselines.DTFM.scheduler import GCMA, compute_data_parallel_cost, compute_pipeline_parallel_cost, get_pipelines
-from sailor.Planner.sailor_planner.python_src.utils import partition_sailor
+from sailor.Planner.sailor_planner.utils import partition_sailor
 
 class DTFMPlanner(BaselinePlanner):
     def __init__(self, profile_file, training_config_file, llm_info, fp16):

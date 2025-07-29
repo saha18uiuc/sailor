@@ -6,6 +6,7 @@ from sailor.Planner.simulations.constants import GPU_MEMORY_GB
 from sailor.Planner.simulations.utils import models
 from sailor.Planner.sailor_planner.constants import MEMORY_BUCKET_DEEPSPEED_SIZE
 from sailor.profiling.profile_utils import estimate_send_time, estimate_ar_time, find_bw, Zone, GPU_Type
+from sailor.Planner.sailor_planner.utils import partition_uniform
 
 
 class VMconfig:
@@ -92,35 +93,6 @@ class Plan:
         plan_to_dict['pipelines'] = pipelines
 
         return plan_to_dict
-
-
-def partition_uniform(num_items, num_parts, verbose=False):
-    '''
-        Copied from Deepspeed
-        https://github.com/microsoft/DeepSpeed/blob/master/deepspeed/runtime/utils.py#L581
-    '''
-    import numpy
-    parts = [0] * (num_parts + 1)
-    # First check for the trivial edge case
-    if num_items <= num_parts:
-        for p in range(num_parts + 1):
-            parts[p] = min(p, num_items)
-    else:
-        chunksize = num_items // num_parts
-        residual = num_items - (chunksize * num_parts)
-        parts = numpy.arange(0, (num_parts + 1) * chunksize, chunksize)
-        for i in range(residual):
-            parts[i + 1:] += 1
-        parts = parts.tolist()
-
-    if verbose:
-        verbose_parts = []
-        for i in range(len(parts)-1):
-            stage = list(range(parts[i], parts[i+1]))
-            verbose_parts.append(stage)
-        return verbose_parts
-
-    return parts
 
 
 def convert_homogeneous(plan: dict, training_config: dict):
