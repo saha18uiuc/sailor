@@ -1,11 +1,13 @@
 ## Reproducing results
 
-### Simulator validation
+### 1. Simulator validation
 
 ### Figure 5a
 
 This experiment validates SAILOR's and the other baselines' simulators on a cluster of GH200 GPUs.
 The experiment tests memory estimation
+
+TODO: add clariden instructions
 
 ```bash
 bash ae_scripts/validation/run_gh200_mem.sh
@@ -26,22 +28,11 @@ python  ae_scripts/validation/plot_box.py ae_results/validation/fig5b/ time
 The results and box plot are under /root/sailor/ae_results/validation/fig5b
 
 
-### Figure 6
-
-This experiment tests iteration time estimation on a cluster of heterogeneous gpus
-
-```bash
-bash ae_scripts/validation/run_het_time.sh
-python  ae_scripts/validation/plot_box.py ae_results/validation/fig6/ mem
-```
-
-The results and box plot are under /root/sailor/ae_results/validation/fig6
-
-### Planner
+### 2. Planner
 
 The following results use the Sailor simulator to evaluate Sailor's and the rest baselines' planners under different settings.
 
-### Figure 7
+### Homogeneous setup - Figure 7
 
 Comparison between Sailor and the rest baselines on a cluster of A100 GPUs
 
@@ -52,17 +43,9 @@ python ae_scripts/planner/plot_bars.py ae_results/planner/fig7/ OPT-350 homogene
 
 ```
 
-### Figure 8
+### Heterogeneous setup - Figure 8b
 
 Heterogeneous setup, with A100 + V100 GPUs, for the OPT-350M model
-
-1. Figure 8a
-
-```bash
-
-bash ae_scripts/planner/run_het_opt.sh
-python ae_scripts/planner/plot_bars.py ae_results/planner/fig8a/ OPT-350 heterogeneous ae_results/planner/fig8a/fig8a.png
-
 
 ```
 
@@ -71,13 +54,13 @@ python ae_scripts/planner/plot_bars.py ae_results/planner/fig8a/ OPT-350 heterog
 ```bash
 
 
-bash ae_scripts/planner/run_het_opt_imbalanced.sh
+bash ae_scripts/planner/run_het.sh
 python ae_scripts/planner/plot_bars.py ae_results/planner/fig8b/ OPT-350 heterogeneous ae_results/planner/fig8b/fig8b.png
 
 
 ```
 
-### Figure 10
+### Geodistributed setup - Figure 10
 
 Comparison between DTFM and Sailor on a geo-distributed setup (A100 GPUs across 5 zones)
 

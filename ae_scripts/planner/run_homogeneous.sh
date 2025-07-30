@@ -8,6 +8,7 @@ python ae_scripts/planner/run_all_sim.py \
 --trace_file /root/sailor/sailor/Planner/simulations/configs/gpu_trace_scaled.csv \
 --basic_cluster_config_json /root/sailor/sailor/Planner/simulations/configs/basic_cluster_config.json \
 --simulator_profile_file /root/sailor/sailor/Planner/simulations/profiles_tmp.json \
+--simulator_profile_file_op /root/sailor/sailor/Planner/simulations/profiles_tmp_aceso.json \
 --quotas_dict /root/sailor/sailor/Planner/sailor_planner/dummy_quotas_dict.json \
 --gpus-per-node 4 \
 --sailor_path /root \

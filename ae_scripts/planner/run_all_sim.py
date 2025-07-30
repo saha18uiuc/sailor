@@ -13,7 +13,7 @@ def run_all_for_model(args):
     res_dir = args.res_dir
 
     base_cmd = f"python {home_dir}/{sailor_sim_path}/simulator.py --sailor_path {args.sailor_path} --trace_file {args.trace_file} --basic_cluster_config_json {args.basic_cluster_config_json} "\
-        f"--training_config_json {train_config_files[args.model_name]}  --simulator_profile_file {args.simulator_profile_file} --result_dir_path {res_dir} "
+        f"--training_config_json {train_config_files[args.model_name]}   --result_dir_path {res_dir} "
 
     if args.max_cost:
         base_cmd += f"--max_cost {args.max_cost} "
@@ -34,9 +34,10 @@ def run_all_for_model(args):
     dtfm_cmd = base_cmd + f"--planner DTFM  --planner_profile_file {args.simulator_profile_file} --quotas_dict {args.quotas_dict}"
     sailor_cmd = base_cmd + f"--planner SAILOR  --sailor_profile_file_dir {home_dir}/sailor/sailor/Planner/sailor_planner/profiles/{args.model_name}/ --quotas_dict {args.quotas_dict}"
     flashflex_cmd = base_cmd +  f"--planner FlashFlex  --planner_profile_file {home_dir}/sailor/sailor/Planner/baselines/FlashFlex/src/machine_amounts.json --objective throughput"
+    aceso_cmd = base_cmd + f"--planner Aceso --planner_profile_file {home_dir}/sailor/sailor/Planner/baselines/Aceso/profiler/{args.gpu_type}"
 
     if args.baselines=="all":
-        all_cmd = [varuna_cmd, piper_cmd, amp_cmd, galvatron_cmd, dtfm_cmd, flashflex_cmd, metis_cmd, sailor_cmd]
+        all_cmd = [varuna_cmd, piper_cmd, amp_cmd, galvatron_cmd, dtfm_cmd, aceso_cmd, flashflex_cmd, metis_cmd, sailor_cmd]
     elif args.baselines=="heterogeneous":
         all_cmd = [amp_cmd, flashflex_cmd, metis_cmd, sailor_cmd]
     elif args.baselines=="geo":
@@ -44,6 +45,10 @@ def run_all_for_model(args):
     elif args.baselines=="cost":
         all_cmd = [galvatron_cmd, amp_cmd, flashflex_cmd, metis_cmd, dtfm_cmd, sailor_cmd]
     for cmd in all_cmd:
+        if cmd==aceso_cmd:
+            cmd += f" --simulator_profile_file {args.simulator_profile_file_op}"
+        else:
+            cmd += f" --simulator_profile_file {args.simulator_profile_file}"
         print(cmd)
         os.system(cmd)
 
@@ -58,6 +63,8 @@ if __name__ == '__main__':
                         help='Json file containing info for the cluster setup.')
     parser.add_argument('--simulator_profile_file', type=str, required=True,
                         help='JSON file containing fwd, bwd and update time for different models and microbatches')
+    parser.add_argument('--simulator_profile_file_op', type=str, required=False,
+                        help='JSON file containing fwd, bwd and update time for different models and microbatches, operator-wise')
     parser.add_argument('--quotas_dict', type=str, default='',
                         help='Json file containing user quotas')
     parser.add_argument("--gpus-per-node", type=int, default=1, help="Number of GPUs per node. Used by Oobleck and Varuna")

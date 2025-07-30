@@ -1,5 +1,6 @@
 Assuming a partition infra02
 
+
 1. Get a compute node: `srun -t 5:00:00 -A a-infra02 --container-writable --pty bash`
 
 2. Clone the sailor repo `git clone https://github.com/eth-easl/sailor.git && cd sailor `
@@ -20,4 +21,12 @@ Assuming a partition infra02
 
 8. To get a container with the image running and get a shell
 
-`srun  -t 5:00:00  --container-writable --environment=/capstor/scratch/cscs/fstrati/sailor/test.toml  --pty bash`
+`srun  -t 5:00:00 -A a-infra02 --container-writable --environment=/capstor/scratch/cscs/$USER/sailor/test.toml  --pty bash`
+
+9. Run a simple training job with just 1 GPU to check all works:
+
+```bash
+cd /root/sailor/third_party/Megatron-DeepSpeed/
+export SAILOR_LOGS_DIR=logs
+bash run.sh 1 0 127.0.0.1 1234 1 1 1 1 1
+```

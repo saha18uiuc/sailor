@@ -28,17 +28,6 @@ vector<vector<int>> get_stages(int num_layers, int pp)
      * 6) Stages essentially is a 2D array, where rows correspond to PP stage and columns correspond to the layers in that stage (layer id)
      */
 
-    // TODO: generalize!
-    if (num_layers==34 && pp==5) {
-        return {
-            {0,1,2,3,4},
-            {5,6,7,8,9,10,11},
-            {12,13,14,15,16,17,18},
-            {19,20,21,22,23,24,25},
-            {26,27,28,29,30,31,32,33}
-        };
-    }
-
     int chunksize = num_layers / pp;
     int residual = num_layers % pp;
     residual = pp - residual;
@@ -505,53 +494,16 @@ vector<vector<int>> find_tmp_degrees(
         {
             auto stage = stages[i];
             auto key = make_pair(stage[0], stage.size());
-            if (gpu_idx==0) { // A100
+            if (gpu_idx==0) {
                 if (homog)
-                    tmps[gpu_idx].push_back(max(4, min_tmps[gpu_idx][i]));
+                    tmps[gpu_idx].push_back(max(max_tmps_vector_per_gpu[gpu_idx][mbs][key], min_tmps[gpu_idx][i]));
                 else
                     tmps[gpu_idx].push_back(max(1, min_tmps[gpu_idx][i]));
-            } else // V100
-                tmps[gpu_idx].push_back(max(4, min_tmps[gpu_idx][i]));
+            } else
+                tmps[gpu_idx].push_back(max(max_tmps_vector_per_gpu[gpu_idx][mbs][key], min_tmps[gpu_idx][i]));
         }
     }
 
-    // for (int gpu_idx=0; gpu_idx<num_available_gpus; gpu_idx++) {
-    //     cout << "TMPS 1 - Check for GPU " << gpu_idx << endl;
-    //     print_vector_int(tmps[gpu_idx]);
-    // }
-
-    // 3. Iterate till all fit
-    // for (int gpu_idx = 0; gpu_idx < num_available_gpus; gpu_idx++)
-    // {
-    //     if (min_tmps[gpu_idx].empty())
-    //     {
-    //         continue;
-    //     }
-    //     while (1)
-    //     {
-    //         int sum_tmps = accumulate(tmps[gpu_idx].begin(), tmps[gpu_idx].end(), 0);
-    //         bool found = false;
-    //         for (int i = 0; i < num_stages; i++)
-    //         {
-    //             if (tmps[gpu_idx][i] > min_tmps[gpu_idx][i])
-    //             {
-    //                 tmps[gpu_idx][i] /= 2;
-    //                 found = true;
-    //                 break;
-    //             }
-    //         }
-    //         if (!found)
-    //         {
-    //             tmps[gpu_idx] = {};
-    //             break;
-    //         }
-    //     }
-    // }
-
-    // for (int gpu_idx=0; gpu_idx<num_available_gpus; gpu_idx++) {
-    //     cout << "TMPS 2 - Check for GPU " << gpu_idx << endl;
-    //     print_vector_int(tmps[gpu_idx]);
-    // }
 
     return tmps;
 }

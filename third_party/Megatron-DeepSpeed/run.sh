@@ -18,7 +18,6 @@ GLOBAL_BATCH_SIZE=$8
 MICRO_BATCH_SIZE=$9
 TRAIN_ITERS=10
 MODEL_NAME=OPT
-LAYERS_PER_STAGE="[6,20]" # example - adapt as needed
 
 GA_STEPS=$((GLOBAL_BATCH_SIZE / (MICRO_BATCH_SIZE * DP_SIZE)))
 
@@ -99,7 +98,6 @@ CMD=" \
     --model-name $MODEL_NAME \
     --gpu-type RTX \
     --results-dir /root/sailor/third_party/Megatron-DeepSpeed/results
-    --layers-per-stage $LAYERS_PER_STAGE
 "
 
 $LAUNCHER --node_rank $NODE_RANK $CMD

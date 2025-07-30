@@ -143,9 +143,9 @@ def plot_config(baselines, idx_list, setup, destination):
         for j,rect in enumerate(bars):
             if (setup!='homogeneous') and (throughput[j] != 0.0):
                 height = rect.get_height()
-                t = plt.text(rect.get_x() + rect.get_width() / 2.0, height+0.75 * offset, f"${cost_list[j]}", ha='center', va='bottom', fontsize=30)
+                t = plt.text(rect.get_x() + rect.get_width() / 2.0, height+0.75 * offset, f"${cost_list[j]}", ha='center', va='bottom', fontsize=20)
                 if 'heterogeneous' in setup:
-                    plt.text(rect.get_x() + rect.get_width() / 2.0, height+2.5*offset, f"{oom_list[j]}", ha='center', va='bottom', fontsize=22, fontweight='bold')
+                    plt.text(rect.get_x() + rect.get_width() / 2.0, height+2.5*offset, f"{oom_list[j]}", ha='center', va='bottom', fontsize=16, fontweight='bold')
 
             if throughput[j]==0.0:
                 t = plt.text(rect.get_x() + rect.get_width() / 2.0, 0.0, f"X", ha='center', va='bottom', fontsize=24, color=colors[baseline])
@@ -188,7 +188,7 @@ if __name__ == "__main__":
     destination = sys.argv[4]
 
     if setup=='homogeneous':
-        baselines = ['Varuna', 'AMP', 'Piper', 'Galvatron', 'FlashFlex', 'Metis', 'DTFM', 'SAILOR']  # add Aceso
+        baselines = ['Varuna', 'AMP', 'Piper', 'Galvatron', 'Aceso', 'FlashFlex', 'Metis', 'DTFM', 'SAILOR']
     elif setup=='heterogeneous' or setup=='heterogeneous-imbalanced':
         baselines = ['AMP', 'FlashFlex', 'Metis', 'SAILOR']
     else:
