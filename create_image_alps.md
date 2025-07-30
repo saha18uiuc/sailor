@@ -1,4 +1,4 @@
-Assuming a partition X
+Assuming a partition infra02
 
 1. Get a compute node: `srun -t 5:00:00 -A a-infra02 --container-writable --pty bash`
 

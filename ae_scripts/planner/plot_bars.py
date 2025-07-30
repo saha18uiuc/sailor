@@ -149,7 +149,7 @@ def plot_config(baselines, idx_list, setup, destination):
 
             if throughput[j]==0.0:
                 t = plt.text(rect.get_x() + rect.get_width() / 2.0, 0.0, f"X", ha='center', va='bottom', fontsize=24, color=colors[baseline])
-                plt.text(rect.get_x() + rect.get_width() / 2.0, 0.005, f"{oom_list[j]}", ha='center', va='bottom', fontsize=24, fontweight='bold')
+            #   plt.text(rect.get_x() + rect.get_width() / 2.0, 0.005, f"{oom_list[j]}", ha='center', va='bottom', fontsize=24, fontweight='bold')
 
     x_offset = x+width*len(baselines_list)/2-width/2
     plt.xticks(x_offset, num_machines_labels)
@@ -188,7 +188,7 @@ if __name__ == "__main__":
     destination = sys.argv[4]
 
     if setup=='homogeneous':
-        baselines = ['Varuna', 'AMP', 'Piper', 'Galvatron', 'Aceso', 'FlashFlex', 'Metis', 'DTFM', 'SAILOR']
+        baselines = ['Varuna', 'AMP', 'Piper', 'Galvatron', 'FlashFlex', 'Metis', 'DTFM', 'SAILOR']  # add Aceso
     elif setup=='heterogeneous' or setup=='heterogeneous-imbalanced':
         baselines = ['AMP', 'FlashFlex', 'Metis', 'SAILOR']
     else:
