@@ -77,29 +77,6 @@ python ae_scripts/planner/plot_bars.py ae_results/planner/fig8b/ OPT-350 heterog
 
 ```
 
-### Figure 9
-
-Heterogeneous setup, with A100 + V100 GPUs, for the GPT-Neo-2.7B model
-
-1. Figure 9a
-
-```bash
-
-bash ae_scripts/planner/run_het_gpt.sh
-python ae_scripts/planner/plot_bars.py ae_results/planner/fig9a/ GPT-Neo-2.7 heterogeneous ae_results/planner/fig9a/fig9a.png
-
-
-```
-
-2. Figure 9b
-
-```bash
-
-bash ae_scripts/planner/run_het_gpt_imbalanced.sh
-python ae_scripts/planner/plot_bars.py ae_results/planner/fig9b/ GPT-Neo-2.7 heterogeneous ae_results/planner/fig9b/fig9b.png
-
-```
-
 ### Figure 10
 
 Comparison between DTFM and Sailor on a geo-distributed setup (A100 GPUs across 5 zones)
