@@ -19,7 +19,6 @@ from sailor.Planner.baselines.Varuna.varuna_planner import VarunaPlanner
 from sailor.Planner.baselines.Metis.metis_planner import MetisPlanner
 from sailor.Planner.baselines.Galvatron.galvatron_planner import GalvatronPlanner
 from sailor.Planner.baselines.Aceso.aceso_planner import AcesoPlanner
-#from sailor.Planner.baselines.nnScaler.nnscaler_planner import nnScalerPlanner
 from sailor.Planner.baselines.Atlas.atlas_planner import AtlasPlanner
 from sailor.Planner.baselines.DTFM.dtfm_planner import DTFMPlanner
 from sailor.Planner.baselines.FlashFlex.flashflex_planner import FlashFlexPlanner
@@ -83,9 +82,6 @@ def evaluate_trace_with_mem(
             all_min_thr = json.load(f)
 
     for idx, (duration, num_gpus_config) in enumerate(gpu_trace):
-
-        if idx != trace_size-1:
-            continue
 
         sim_result = {}
         oom_plans_case = 0
@@ -259,10 +255,6 @@ def evaluate(args):
         with open(f"{args.sailor_path}/sailor/sailor/Planner/llm_info_aceso.json", 'r') as f:
             llm_info = json.load(f)
             op_simulator = True
-    elif args.planner in ["nnScaler"]:
-        with open(f"{args.sailor_path}/sailor/sailor/Planner/llm_info_nnscaler.json", 'r') as f:
-            llm_info = json.load(f)
-            op_simulator = True
     # layer level info
     else:
         with open(f"{args.sailor_path}/sailor/sailor/Planner/llm_info.json", 'r') as f:
@@ -286,8 +278,6 @@ def evaluate(args):
         planner = GalvatronPlanner(args.training_config_json, args.planner_profile_file, args.objective)  # TODO
     elif args.planner == 'Aceso':
         planner = AcesoPlanner(args.planner_profile_file, fp16=args.fp16)
-    elif args.planner == 'nnScaler':
-        planner = nnScalerPlanner(args.planner_profile_file)
     elif args.planner == 'Atlas':
         planner = AtlasPlanner(
             args.planner_profile_file,
@@ -351,12 +341,6 @@ def evaluate(args):
     print(f"-------------------- Save results in path {res_path}")
     with open(res_path, 'w') as f:
         json.dump(sim_result_list, f, indent=2)
-
-    # throughputs = [sim_result['throughput'] for sim_result in sim_result_list]
-    # costs = [sim_result['cost_per_sec'] for sim_result in sim_result_list]
-
-    # iterations, total_cost = accumulate(gpu_trace, throughputs, costs)
-
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Simulator',

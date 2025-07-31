@@ -14,4 +14,4 @@ python ae_scripts/planner/run_all_sim.py \
 --sailor_path /root \
 --res_dir ae_results/planner/fig7 \
 --objective throughput \
---baselines homogeneous
+--baselines all

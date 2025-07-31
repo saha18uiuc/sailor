@@ -1,13 +1,34 @@
+## Creating the image
+
+We provide a Dockerfile with all dependencies needed for Sailor.
+When using docker, create the image by:
+
+```bash
+git clone https://github.com/eth-easl/sailor.git
+cd sailor
+docker buildx build -t <image_name> .
+```
+
+## Minimal functional example
+
+For a functional example, and step 1 of the following Reproducing results section, we will use the the [Alps Clariden](https://docs.cscs.ch/clusters/clariden/#logging-into-clariden) cluster.
+After creating an account and being added to our project, follow the instructions in [create_image_alps.md](create_image_alps.md) to create an image in the Alps cluster, get a node, and run a simple example.
+
 ## Reproducing results
 
 ### 1. Simulator validation
+
+### Get results on the Clariden cluster
+TODO
+
+### Process results
+TODO
+
 
 ### Figure 5a
 
 This experiment validates SAILOR's and the other baselines' simulators on a cluster of GH200 GPUs.
 The experiment tests memory estimation
-
-TODO: add clariden instructions
 
 ```bash
 bash ae_scripts/validation/run_gh200_mem.sh
