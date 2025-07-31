@@ -97,7 +97,6 @@ CMD=" \
     --train-iters $TRAIN_ITERS \
     --model-name $MODEL_NAME \
     --gpu-type RTX \
-    --results-dir /root/sailor/third_party/Megatron-DeepSpeed/results
 "
 
 $LAUNCHER --node_rank $NODE_RANK $CMD
