@@ -106,54 +106,6 @@ class SailorPlanner():
             dp_per_stage = [len(stage) for stage in configs_per_stage]
             num_stages = len(list(config.get_stages()))
 
-            # if num_stages==5:
-            #     layers = [
-            #         [
-            #             0,
-            #             1,
-            #             2,
-            #             3,
-            #             4
-            #         ],
-            #         [
-            #             5,
-            #             6,
-            #             7,
-            #             8,
-            #             9,
-            #             10,
-            #             11
-            #         ],
-            #         [
-            #             12,
-            #             13,
-            #             14,
-            #             15,
-            #             16,
-            #             17,
-            #             18
-            #         ],
-            #         [
-            #             19,
-            #             20,
-            #             21,
-            #             22,
-            #             23,
-            #             24,
-            #             25
-            #         ],
-            #         [
-            #             26,
-            #             27,
-            #             28,
-            #             29,
-            #             30,
-            #             31,
-            #             32,
-            #             33
-            #         ]
-            #     ]
-            # else:
             layers = config.get_stages()
 
             pipeline_list = [{

@@ -165,7 +165,7 @@ class Simulator():
 
         # inter-node
         self.inter_network_coeffs = InterNodeNetworkInfo(
-            f'{sailor_path}/sailor/sailor/providers/gcp/multizone_bandwidths.json')
+            f'{sailor_path}/sailor/sailor/providers/multizone_bandwidths_het.json')
 
         with open(f'{sailor_path}/sailor/sailor/providers/intra_node_bandwidths.json', 'r') as f:
             intra_network_coeffs_dict = json.load(f)
@@ -449,7 +449,6 @@ class Simulator():
 
     def estimate_sync_time(self, plan: Plan):
 
-        # TODO: Fix for Oobleck: Bottlenecked by the smallest pipeline
         pipeline = plan.pipeline_list[0]
         t_sync = 0.0
 
@@ -460,7 +459,7 @@ class Simulator():
             for i, stage in enumerate(pipeline.layers_per_stage):
                 t_sync_stage = 0.0
                 #print(f"Estimate sync time for stage {i}")
-                tp_min = 4 # 4 for clariden and GCP
+                tp_min = 4
                 for tp_config in pipeline.tmp_configs[i]:
                     tp_min = min(tp_min, tp_config.tmp)
                 stage_size = sum([self.weight_sizes_per_layer[layer]/tp_min for layer in stage])

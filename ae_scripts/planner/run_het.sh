@@ -1,5 +1,7 @@
 #!/bin/bash
 
+mkdir -p ae_results/planner/fig8b
+
 python ae_scripts/planner/run_all_sim.py \
 --model-name OPT-350 \
 --gpu-type A100-40 \

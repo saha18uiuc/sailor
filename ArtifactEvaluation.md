@@ -76,7 +76,7 @@ Heterogeneous setup, with A100 + V100 GPUs, for the OPT-350M model
 
 
 bash ae_scripts/planner/run_het.sh
-python ae_scripts/planner/plot_bars.py ae_results/planner/fig8b/ OPT-350 heterogeneous ae_results/planner/fig8b/fig8b.png
+python ae_scripts/planner/plot_bars.py ae_results/planner/fig8b/ OPT-350 heterogeneous-imbalanced ae_results/planner/fig8b/fig8b.png
 
 
 ```
