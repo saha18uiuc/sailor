@@ -489,13 +489,13 @@ def pretrain(train_valid_test_dataset_provider,
 
     print_memory = int(os.getenv("PRINT_MEMORY", 0))
     if print_memory:
-        device_id = torch.cuda.current_device()
-        tp = mpu.get_tensor_model_parallel_rank()
-        dp = mpu.get_data_parallel_rank()
-        pp = mpu.get_pipeline_model_parallel_rank()
-        source = f"memory_log_{device_id}"
-        dest = f"memory_log_{dp}_{pp}_{tp}"
-        os.system(f"mv {source} {dest}")
+        # device_id = torch.cuda.current_device()
+        # tp = mpu.get_tensor_model_parallel_rank()
+        # dp = mpu.get_data_parallel_rank()
+        # pp = mpu.get_pipeline_model_parallel_rank()
+        # source = f"memory_log_{device_id}"
+        # dest = f"memory_log_{dp}_{pp}_{tp}"
+        # os.system(f"mv {source} {dest}")
 
         Path(args.results_dir).mkdir(parents=True, exist_ok=True)
         if mpu.get_tensor_model_parallel_rank() == 0:

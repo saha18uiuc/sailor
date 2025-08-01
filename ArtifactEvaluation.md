@@ -18,14 +18,28 @@ After creating an account and being added to our project, follow the instruction
 
 ### 1. Simulator validation
 
+For this stage, an image need to have been built in Clariden, as described above. We will first run some training jobs in Clariden to measure iteration time and memory bandwidth, then we will process the results and update the testing configuration files, and then we will validate the Sailor and other simulators.
+
+Note: Since Aceso needs seperate runs, we omit it to save time
+
+
 ### Get results on the Clariden cluster
-TODO
+
+1. Login to Clariden and go to '/capstor/scratch/cscs/$USER/sailor' directory
+
+2.  Run the script [clariden_scripts/run.sh](clariden_scripts/run.sh). This submits slurm jobs of the Sailor framework with different configurations. We are testing both iteration time and memory footprint. You can use 'squeue' to check the status of your jobs.
 
 ### Process results
-TODO
+After all jobs have finished, we have to process the results. The results for both iteration time and memory configurations are under /capstor/scratch/cscs/$USER/sailor/clariden/OPT-350.
+
+1. Start a container using the Sailor image (e.g. can be a local server - make sure to build the image as in the README)
+
+1. Once inside the container, do:
+
+This will overwrite the testing configurations under [  ], which will be used for validation.
 
 
-### Figure 5a
+### Validation - Figure 5a
 
 This experiment validates SAILOR's and the other baselines' simulators on a cluster of GH200 GPUs.
 The experiment tests memory estimation
@@ -37,7 +51,7 @@ python ae_scripts/validation/plot_box.py ae_results/validation/fig5a/ mem
 
 The results and box plot are under /root/sailor/ae_results/validation/fig5a
 
-### Figure 5b
+### Validation - Figure 5b
 
 Same as before, but now the experiment tests iteration time estimation
 
@@ -51,7 +65,7 @@ The results and box plot are under /root/sailor/ae_results/validation/fig5b
 
 ### 2. Planner
 
-The following results use the Sailor simulator to evaluate Sailor's and the rest baselines' planners under different settings.
+The following results use the Sailor simulator to evaluate Sailor's and the rest baselines' planners under different settings. You need to be inside a Sailor container to run the following scripts
 
 ### Homogeneous setup - Figure 7
 

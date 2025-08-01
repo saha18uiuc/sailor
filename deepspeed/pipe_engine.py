@@ -101,9 +101,6 @@ class PipelineEngine(DeepSpeedEngine):
         self.print_memory = int(os.getenv("PRINT_MEMORY", 0))
         self.device_id = torch.cuda.current_device()
 
-        if self.print_memory:
-            self.writer = open(f"memory_log_{self.device_id}", 'w')
-
         # used to disable the pipeline all-reduce when used with 1-bit Adam/1-bit LAMB
         self.pipeline_enable_backward_allreduce = True
 
@@ -128,6 +125,8 @@ class PipelineEngine(DeepSpeedEngine):
         log_dir = os.getenv("SAILOR_LOGS_DIR")
         log_file_name = f"{log_dir}/sailor_log_worker_rank_{self.global_rank}"
         self.log_file = open(log_file_name, 'w')
+        if self.print_memory:
+            self.writer = open(f"{log_dir}/memory_log_worker_rank_{self.global_rank}", 'w')
 
         assert self.dp_world_size == self.grid.data_parallel_size
         assert self.train_batch_size() == \
