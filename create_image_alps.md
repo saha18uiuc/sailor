@@ -18,7 +18,7 @@ This guide assumes you already have successfully logged in to Alps, and added to
 7. Make it readable
 `setfacl -b test.sqsh && chmod 755 test.sqsh`
 
-8. Create a .toml file or just reuse the one in [clariden_scripts/sailor.toml](clariden_scripts/sailor.toml)
+8. Replace the 'user' with your username in [clariden_scripts/sailor.toml](clariden_scripts/sailor.toml)
 
 9. To get a container with the image running and get a shell
 

@@ -1,0 +1,13 @@
+image = "/capstor/scratch/cscs/user/sailor/test.sqsh"
+
+mounts = [
+  "/capstor",
+  "/iopsstor",
+  "/users"
+]
+
+workdir = "/root"
+
+[annotations]
+com.hooks.aws_ofi_nccl.enabled = "true"
+com.hooks.aws_ofi_nccl.variant = "cuda12"

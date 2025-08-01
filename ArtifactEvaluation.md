@@ -32,12 +32,22 @@ Note: Since Aceso needs seperate runs, we omit it to save time
 ### Process results
 After all jobs have finished, we have to process the results. The results for both iteration time and memory configurations are under /capstor/scratch/cscs/$USER/sailor/clariden/OPT-350.
 
-1. Start a container using the Sailor image (e.g. can be a local server - make sure to build the image as in the README)
+1. Copy the files to the host you want to evaluate the rest of the artifact (no GPU required). Clone the sailor repo and build the image (e.g. with docker, as mentioned above).
 
-1. Once inside the container, do:
+2. Start a container using the Sailor image
 
-This will overwrite the testing configurations under [  ], which will be used for validation.
+3. Once inside the container, do:
 
+```bash
+
+cd ae_scripts/clariden_scripts
+bash process_results.sh <results_dir> ../../sailor/Planner/simulations/validation/clariden/OPT-350/
+
+```
+
+Replace 'results_dir' with your copied directory from step 1. This will overwrite the testing configurations under sailor/Planner/simulations/validation/clariden/OPT-350/, which will be used for validation in the following steps.
+
+**Note: from now on, you should be inside the Sailor container**
 
 ### Validation - Figure 5a
 
@@ -62,8 +72,7 @@ python  ae_scripts/validation/plot_box.py ae_results/validation/fig5b/ time
 
 The results and box plot are under /root/sailor/ae_results/validation/fig5b
 
-
-### 2. Planner
+### 2. Planner evaluation
 
 The following results use the Sailor simulator to evaluate Sailor's and the rest baselines' planners under different settings. You need to be inside a Sailor container to run the following scripts
 

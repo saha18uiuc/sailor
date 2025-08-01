@@ -25,7 +25,7 @@ class MetisSimulator():
         with open(f"{home_dir}/sailor/sailor/providers/intra_node_bandwidths.json", 'r') as f:
             self.intra_network_config = json.load(f)
 
-        with open(f"{home_dir}/sailor/sailor/providers/gcp/multizone_bandwidths.json", 'r') as f:
+        with open(f"{home_dir}/sailor/sailor/providers/multizone_bandwidths.json", 'r') as f:
             self.inter_network_config = json.load(f)
 
 

@@ -115,8 +115,7 @@ srun -A a-infra02 -t 5:00:00 -ul --container-writable --environment=/capstor/scr
 
 echo 'hello'
 
-cp /capstor/scratch/cscs/fstrati/sailor/third_party/Megatron-DeepSpeed/megatron/training.py /root/sailor/third_party/Megatron-DeepSpeed/megatron/
-cp /capstor/scratch/cscs/fstrati/sailor/deepspeed/pipe_engine.py /usr/local/lib/python3.10/dist-packages/deepspeed/runtime/pipe/engine.py
+
 $LAUNCHER --node_rank \$SLURM_PROCID $CMD
 
 "
