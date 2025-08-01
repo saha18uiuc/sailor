@@ -35,18 +35,16 @@ Notes:
 
 **Note: If you are running on a different project than a-infra02, please replace a-infra02 with your project ID in [ae_scripts/clariden_scripts/run.sh](ae_scripts/clariden_scripts/run.sh) and [ae_scripts/clariden_scripts/run_opt.slurm](ae_scripts/clariden_scripts/run_opt.slurm)**
 
-**To save time, you can proceed to section 2, 'Planner evaluation', which is independent of the Clariden experiments, and can run on any machine. For this, make sure you have built the Sailor image with docker, and you are inside the Sailor container**
+**To save time, while the jobs are running, you can proceed to section 2, 'Planner evaluation', which is independent of the Clariden experiments, and can run on any machine. For this, make sure you have built the Sailor image with docker, and you are inside the Sailor container**
 
 ### Process results
 After all jobs have finished, we have to process the results. The results for both iteration time and memory configurations are under /capstor/scratch/cscs/$USER/sailor/clariden/OPT-350.
 
-**Note: from now on, you should be inside the Sailor container (e.g. on a local machine). You can logout from the Alps cluster.**
+**Note: You can logout from the Alps cluster, all remaining experiments will run on a Sailor container in any machine.**
 
-1. Copy the files to the host you want to evaluate the rest of the artifact (no GPU required). Clone the sailor repo and build the image (e.g. with docker, as mentioned above).
+1. Copy the files to the host you want to evaluate the rest of the artifact (no GPU required). Clone the sailor repo and go to the sosp25_ae branch.
 
-2. Rebuild the Sailor image, and start a container using the Sailor image
-
-3. Once inside the container, do:
+2. Do:
 
 ```bash
 cd ae_scripts/clariden_scripts
@@ -55,7 +53,10 @@ bash process_results.sh <results_dir_to_OPT-350> ../../sailor/Planner/simulation
 
 Replace 'results_dir_to_OPT-350' with your copied directory from step 1. This will overwrite the testing configurations under sailor/Planner/simulations/validation/clariden/OPT-350/, which will be used for validation in the following steps.
 
-**Note: from now on, you should be inside the Sailor container**
+3. Rebuild the Sailor docker image, start the Sailor container and log in to the container.
+
+**Note: from now on, you should be inside the Sailor container.**
+
 
 ### Validation - Figure 5a
 
