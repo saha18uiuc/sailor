@@ -1,7 +1,7 @@
 !/bin/bash
 
 MODEL=OPT-350
-script=clariden_scripts/run_opt.slurm
+script=ae_scripts/clariden_scripts/run_opt.slurm
 
 ################################### 1 node
 export NODES=1

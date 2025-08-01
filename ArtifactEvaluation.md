@@ -5,7 +5,7 @@ When using docker, create the image by:
 
 ```bash
 git clone https://github.com/eth-easl/sailor.git
-cd sailor
+cd sailor && git checkout sosp25_ae
 docker buildx build -t <image_name> .
 ```
 
@@ -16,18 +16,22 @@ After creating an account and being added to our project, follow the instruction
 
 ## Reproducing results
 
-### 1. Simulator validation
+We provide scripts that automate experiments for key figures in the paper.
+Please note that the Planner evaluation experiments do not depend on the Simulator validation experiments, so you can run them in any order.
+
+## 1. Simulator validation
 
 For this stage, an image need to have been built in Clariden, as described above. We will first run some training jobs in Clariden to measure iteration time and memory bandwidth, then we will process the results and update the testing configuration files, and then we will validate the Sailor and other simulators.
 
-Note: Since Aceso needs seperate runs, we omit it to save time
-
+Notes:
+* Since Aceso needs seperate runs, we omit it to save time
+* We have done the necessary profiling of the model and cluster network
 
 ### Get results on the Clariden cluster
 
 1. Login to Clariden and go to '/capstor/scratch/cscs/$USER/sailor' directory
 
-2.  Run the script [clariden_scripts/run.sh](clariden_scripts/run.sh). This submits slurm jobs of the Sailor framework with different configurations. We are testing both iteration time and memory footprint. You can use 'squeue' to check the status of your jobs.
+2.  Run the script [ae_scripts/clariden_scripts/run.sh](ae_scripts/clariden_scripts/run.sh). This submits slurm jobs of the Sailor framework with different configurations. We are testing both iteration time and memory footprint. You can use 'squeue' to check the status of your jobs.
 
 ### Process results
 After all jobs have finished, we have to process the results. The results for both iteration time and memory configurations are under /capstor/scratch/cscs/$USER/sailor/clariden/OPT-350.
@@ -39,13 +43,11 @@ After all jobs have finished, we have to process the results. The results for bo
 3. Once inside the container, do:
 
 ```bash
-
 cd ae_scripts/clariden_scripts
-bash process_results.sh <results_dir> ../../sailor/Planner/simulations/validation/clariden/OPT-350/
-
+bash process_results.sh <results_dir_to_OPT-350> ../../sailor/Planner/simulations/validation/clariden/OPT-350/
 ```
 
-Replace 'results_dir' with your copied directory from step 1. This will overwrite the testing configurations under sailor/Planner/simulations/validation/clariden/OPT-350/, which will be used for validation in the following steps.
+Replace 'results_dir_to_OPT-350' with your copied directory from step 1. This will overwrite the testing configurations under sailor/Planner/simulations/validation/clariden/OPT-350/, which will be used for validation in the following steps.
 
 **Note: from now on, you should be inside the Sailor container**
 
@@ -72,7 +74,7 @@ python  ae_scripts/validation/plot_box.py ae_results/validation/fig5b/ time
 
 The results and box plot are under /root/sailor/ae_results/validation/fig5b
 
-### 2. Planner evaluation
+## 2. Planner evaluation
 
 The following results use the Sailor simulator to evaluate Sailor's and the rest baselines' planners under different settings. You need to be inside a Sailor container to run the following scripts
 
@@ -81,27 +83,18 @@ The following results use the Sailor simulator to evaluate Sailor's and the rest
 Comparison between Sailor and the rest baselines on a cluster of A100 GPUs
 
 ```bash
-
 bash ae_scripts/planner/run_homogeneous.sh
 python ae_scripts/planner/plot_bars.py ae_results/planner/fig7/ OPT-350 homogeneous ae_results/planner/fig7/fig7.png
-
 ```
 
 ### Heterogeneous setup - Figure 8b
 
 Heterogeneous setup, with A100 + V100 GPUs, for the OPT-350M model
 
-```
-
-2. Figure 8b
 
 ```bash
-
-
 bash ae_scripts/planner/run_het.sh
 python ae_scripts/planner/plot_bars.py ae_results/planner/fig8b/ OPT-350 heterogeneous-imbalanced ae_results/planner/fig8b/fig8b.png
-
-
 ```
 
 ### Geodistributed setup - Figure 10
@@ -109,11 +102,10 @@ python ae_scripts/planner/plot_bars.py ae_results/planner/fig8b/ OPT-350 heterog
 Comparison between DTFM and Sailor on a geo-distributed setup (A100 GPUs across 5 zones)
 
 ```bash
-
 bash ae_scripts/planner/run_geo.sh
 python ae_scripts/planner/plot_bars.py ae_results/planner/fig10/ OPT-350 geo ae_results/planner/fig10/fig10.png
-
 ```
+
 The results and plot are under /root/sailor/ae_results/validation/fig10.
 Note: DTFM uses random values, so the result configurations might be different from the ones in Fig 10, and this is expected (you can try rerunning to check). We have run DTFM multiple times and show huge performance gap compared to SAILOR.
 
@@ -122,7 +114,6 @@ Note: DTFM uses random values, so the result configurations might be different f
 Cost minimization with minimum throughput constraint
 
 ```bash
-
 bash ae_scripts/planner/run_fig11.sh
 python ae_scripts/planner/plot_mul_obj.py ae_results/planner/fig11/ OPT-350 dollars_per_iter ae_results/planner/fig11/fig11.png
 ```
@@ -132,7 +123,6 @@ python ae_scripts/planner/plot_mul_obj.py ae_results/planner/fig11/ OPT-350 doll
 Throughput maximization with maximum budget
 
 ```bash
-
 bash ae_scripts/planner/run_fig12.sh
 python ae_scripts/planner/plot_mul_obj.py ae_results/planner/fig12/ OPT-350 total_throughput ae_results/planner/fig12/fig12.png
 ```

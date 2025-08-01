@@ -4,7 +4,7 @@ This guide assumes you already have successfully logged in to Alps, and added to
 
 2. Get a compute node: `srun -t 5:00:00 -A a-infra02 --container-writable --pty bash`
 
-3. Clone the sailor repo `git clone https://github.com/eth-easl/sailor.git && cd sailor `
+3. Clone the sailor repo `git clone https://github.com/eth-easl/sailor.git && cd sailor && git checkout sosp25_ae `
 
 4. While in the folder with the Dockerfile, create a new a new image (adjust the name as you want)
 `podman build -t test:v1 .`
@@ -18,13 +18,15 @@ This guide assumes you already have successfully logged in to Alps, and added to
 7. Make it readable
 `setfacl -b test.sqsh && chmod 755 test.sqsh`
 
-8. Replace the 'user' with your username in [clariden_scripts/sailor.toml](clariden_scripts/sailor.toml)
+8. Log out of the node
 
-9. To get a container with the image running and get a shell
+9. Replace the 'user' with your username in [ae_scripts/clariden_scripts/sailor.toml](ae_scripts/clariden_scripts/sailor.toml)
 
-`srun  -t 5:00:00 -A a-infra02 --container-writable --environment=/capstor/scratch/cscs/$USER/sailor/test.toml  --pty bash`
+10. To get a container with the image running and get a shell
 
-10. Run a simple training job with just 1 GPU to check all works:
+`srun  -t 5:00:00 -A a-infra02 --container-writable --environment=/capstor/scratch/cscs/$USER/sailor/ae_scripts/clariden_scripts/sailor.toml  --pty bash`
+
+11. Run a simple training job with just 1 GPU to check all works:
 
 ```bash
 cd /root/sailor/third_party/Megatron-DeepSpeed/
