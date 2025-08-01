@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 
 MODEL=OPT-350
 script=ae_scripts/clariden_scripts/run_opt.slurm

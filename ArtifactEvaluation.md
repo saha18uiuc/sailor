@@ -33,6 +33,8 @@ Notes:
 
 2.  Run the script [ae_scripts/clariden_scripts/run.sh](ae_scripts/clariden_scripts/run.sh). This submits slurm jobs of the Sailor framework with different configurations. We are testing both iteration time and memory footprint. You can use 'squeue' to check the status of your jobs.
 
+**Note: If you are running on a different project than a-infra02, please replace a-infra02 with your project ID in [ae_scripts/clariden_scripts/run.sh](ae_scripts/clariden_scripts/run.sh) and [ae_scripts/clariden_scripts/run_opt.slurm](ae_scripts/clariden_scripts/run_opt.slurm)**
+
 ### Process results
 After all jobs have finished, we have to process the results. The results for both iteration time and memory configurations are under /capstor/scratch/cscs/$USER/sailor/clariden/OPT-350.
 
