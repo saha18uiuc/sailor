@@ -35,12 +35,16 @@ Notes:
 
 **Note: If you are running on a different project than a-infra02, please replace a-infra02 with your project ID in [ae_scripts/clariden_scripts/run.sh](ae_scripts/clariden_scripts/run.sh) and [ae_scripts/clariden_scripts/run_opt.slurm](ae_scripts/clariden_scripts/run_opt.slurm)**
 
+**To save time, you can proceed to section 2, 'Planner evaluation', which is independent of the Clariden experiments, and can run on any machine. For this, make sure you have built the Sailor image with docker, and you are inside the Sailor container**
+
 ### Process results
 After all jobs have finished, we have to process the results. The results for both iteration time and memory configurations are under /capstor/scratch/cscs/$USER/sailor/clariden/OPT-350.
 
+**Note: from now on, you should be inside the Sailor container (e.g. on a local machine). You can logout from the Alps cluster.**
+
 1. Copy the files to the host you want to evaluate the rest of the artifact (no GPU required). Clone the sailor repo and build the image (e.g. with docker, as mentioned above).
 
-2. Start a container using the Sailor image
+2. Rebuild the Sailor image, and start a container using the Sailor image
 
 3. Once inside the container, do:
 
