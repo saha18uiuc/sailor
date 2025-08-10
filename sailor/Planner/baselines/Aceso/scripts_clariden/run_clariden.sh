@@ -1,6 +1,6 @@
 script=scripts_clariden/aceso_opt_execute.slurm
 # path to Aceso folder
-export ROOT_PATH=/root/sailor/sailor/Planner/baselines/Aceso
+export ROOT_PATH=/capstor/scratch/cscs/$USER/sailor/sailor/Planner/baselines/Aceso
 
 ################################### 1 nodes
 export NODES=1
