@@ -2,8 +2,8 @@ import sys
 import os 
 import csv 
 
-print_time = False
-print_memory = False
+print_time = True
+print_memory = True
 
 model_name = 'OPT-350'
 src_data_path = 'aceso_validation_clariden'
@@ -63,7 +63,7 @@ for __target_config in target_configs:
         print(f"{file_dir} not exist")
 
     if print_time:
-        print(f"-------- {model_name} End-to-end throughput --------")
+        print(f"-------- {model_name} {__target_config} End-to-end throughput --------")
         print(f"Configuration\t Min_time(s)\t Max_time(s)\t Diff")
         diff = best_result[2] - best_result[1]
         print(f"{best_result[0]}\t {best_result[1]:.2f}\t\t {best_result[2]:.2f}\t\t {diff:.6f}")
@@ -75,8 +75,6 @@ for __target_config in target_configs:
     if os.path.exists(file_dir):
         files = [f for f in os.listdir(file_dir) if os.path.isfile(os.path.join(file_dir, f))]
         
-        max_time = 0
-        min_time = 1e9
         for file_name in files:
             config = file_name.split('_')[1]
             if config != target_config:
@@ -117,10 +115,12 @@ for __target_config in target_configs:
                     if max_reserved < min_memory[5]:
                         min_memory[5] = max_reserved
         real_memory_list.append(max_memory[1])
+        if max_memory[1] == 0:
+            print(f"Warning: csv for config {__target_config} not exist")
     else:
         print(f"{file_dir} not exist")
     if print_memory:
-        print(f"-------- {model_name} End-to-end memory --------")
+        print(f"-------- {model_name} {__target_config} End-to-end memory --------")
         print(f"Type\t Total(s)\t Allocated(s)\t Max_allocated\t Reserved\t Max_reserved")
         # print(f"{min_memory[0]}\t {min_memory[1]:.2f}\t\t {min_memory[2]:.2f}\t\t {min_memory[3]:.2f}\t\t {min_memory[4]:.2f}\t\t {min_memory[5]:.2f}")
         print(f"{max_memory[0]}\t {max_memory[1]:.2f}\t\t {max_memory[2]:.2f}\t\t {max_memory[3]:.2f}\t\t {max_memory[4]:.2f}\t\t {max_memory[5]:.2f}")
@@ -158,6 +158,7 @@ for i in range(len(target_configs)):
     aceso_mem_b = aceso_memory_list[i] * 1024 * 1024
     lines_memory.append(f'{N},{gbs},{dp},{pp},{tp},{mbs},{real_mem_b:.2f},{aceso_mem_b:.2f}\n')
     target_config = f'{N}-{gbs}-{dp}-{pp}-{mbs}'
+    print(target_config, aceso_memory_list[i], real_memory_list[i])
     diff_time = abs(1 - aceso_time_list[i] / real_time_list[i]) * 100
     diff_memory = abs(1 - aceso_memory_list[i] / real_memory_list[i]) * 100
     total_diff_time += diff_time

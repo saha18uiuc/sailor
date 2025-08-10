@@ -6,23 +6,14 @@ from megatron import get_args, get_timers, mpu
 from .module import MegatronModule
 from functools import reduce
 import operator
-import numpy as np
+import numpy as np 
 from megatron.mpu.mappings import tensor_adapter
-import os
-import time
+import os 
 from megatron.utils import debug_mem_report
 from megatron.utils import report_memory
-
+ 
 NUM_BATCHES = 0
 DEBUG_OUTPUT = os.environ.get("DEBUG_OUTPUT", '0') == '1'
-
-take_time_fwd_start_events = {}
-take_time_fwd_end_events = {}
-take_time_bwd_start_events = {}
-take_time_bwd_end_events = {}
-
-op_idx = 0
-last_op_idx = 0
 
 def print_tensors(op_name, output_tensors):
     args = get_args()
@@ -31,7 +22,7 @@ def print_tensors(op_name, output_tensors):
         for key in output_tensors:
             string += f"\n[{key}] (shape: {list(output_tensors[key].size())}) = {output_tensors[key]}"
         with open(f"{args.log_path}{args.log_name}_debug_output_rank{torch.distributed.get_rank()}.log", "a+") as f:
-            f.write(string+"\n")
+            f.write(string+"\n")  
 
 def print_ops_info(ops, recompute_ops):
     ck_ops = ""
@@ -52,7 +43,7 @@ def get_prev_stage_index(pipeline_rank, virtual_pipeline_rank):
         prev_pipeline_rank = mpu.get_pipeline_model_parallel_world_size() - 1
         prev_virtual_pipeline_rank -= 1
     op_start_index_prev_stage = mpu.get_op_start_index(prev_pipeline_rank, prev_virtual_pipeline_rank)
-    op_end_index_prev_stage = mpu.get_op_end_index(prev_pipeline_rank, prev_virtual_pipeline_rank)
+    op_end_index_prev_stage = mpu.get_op_end_index(prev_pipeline_rank, prev_virtual_pipeline_rank)  
     return op_start_index_prev_stage, op_end_index_prev_stage
 
 def get_next_stage_index(pipeline_rank, virtual_pipeline_rank):
@@ -63,7 +54,7 @@ def get_next_stage_index(pipeline_rank, virtual_pipeline_rank):
         next_pipeline_rank = 0
         next_virtual_pipeline_rank += 1
     op_start_index_next_stage = mpu.get_op_start_index(next_pipeline_rank, next_virtual_pipeline_rank)
-    op_end_index_next_stage = mpu.get_op_end_index(next_pipeline_rank, next_virtual_pipeline_rank)
+    op_end_index_next_stage = mpu.get_op_end_index(next_pipeline_rank, next_virtual_pipeline_rank)  
     return op_start_index_next_stage, op_end_index_next_stage
 
 ## we don't consider any communication optimization in this place,
@@ -133,17 +124,17 @@ def initialize_comm_info(tensors_info, dst_stage, src_op_index=0, dst_op_index=0
                     send_info["tensors"][key]["tp_chunks_index"] = range(num_tp_chunks)
                 else:
                     if tp_split_dim != -1:
-                        send_info["tensors"][key]["tp_chunks_index"] = range(num_tp_chunks)
+                        send_info["tensors"][key]["tp_chunks_index"] = range(num_tp_chunks)     
                     else:
                         ratio = tp_size // dst_tp_size
                         num_tp_chunks = ratio
                         send_info["tensors"][key]["tp_split_dim"] = 0
                         send_info["tensors"][key]["num_tp_chunks"] = num_tp_chunks
-                        send_info["tensors"][key]["tp_chunks_index"] = [tp_id % num_tp_chunks]
+                        send_info["tensors"][key]["tp_chunks_index"] = [tp_id % num_tp_chunks]  
 
             if dst_dp_size > dp_size:
                 ratio = dst_dp_size // dp_size
-                num_dp_chunks = ratio
+                num_dp_chunks = ratio 
 
                 if dp_split_dim != -1:
                     recv_info["tensors"][key]["dp_split_dim"] = dp_split_dim
@@ -164,13 +155,13 @@ def initialize_comm_info(tensors_info, dst_stage, src_op_index=0, dst_op_index=0
                 if dp_split_dim != -1:
                     send_info["tensors"][key]["dp_split_dim"] = dp_split_dim
                     send_info["tensors"][key]["num_dp_chunks"] = num_dp_chunks
-                    send_info["tensors"][key]["dp_chunks_index"] = range(num_dp_chunks)
+                    send_info["tensors"][key]["dp_chunks_index"] = range(num_dp_chunks)     
                 else:
                     ratio = dp_size // dst_dp_size
                     num_dp_chunks = ratio
                     send_info["tensors"][key]["dp_split_dim"] = 0
                     send_info["tensors"][key]["num_dp_chunks"] = num_dp_chunks
-                    send_info["tensors"][key]["dp_chunks_index"] = [dp_id % num_dp_chunks]
+                    send_info["tensors"][key]["dp_chunks_index"] = [dp_id % num_dp_chunks]                
 
             recv_info["tensors"][key]["shape"] = shape
             recv_info["size"] += reduce(operator.mul, shape, 1)
@@ -187,7 +178,7 @@ def initialize_communication(model_chunk_op_list):
     output_tensors_info = model_chunk_op_list[op_end_index - op_start_index - 1].output_tensors_info
 
     input_extra_tensors_dict = {}
-    if pipeline_rank > 0 or virtual_pipeline_rank > 0:
+    if pipeline_rank > 0 or virtual_pipeline_rank > 0: 
         op_start_index_prev_stage, op_end_index_prev_stage = get_prev_stage_index(pipeline_rank, virtual_pipeline_rank)
         for op_index in range(op_start_index, op_end_index):
             op = model_chunk_op_list[op_index - op_start_index]
@@ -199,7 +190,7 @@ def initialize_communication(model_chunk_op_list):
                     input_extra_tensors_dict[key] = {"info": {key: op.input_extra_tensors_info[key]}, "src_op": op_index, "dst_op": op_index_recv_from}
 
     output_extra_tensors_dict = {}
-    if pipeline_rank < mpu.get_pipeline_model_parallel_world_size()-1 or virtual_pipeline_rank < mpu.get_virtual_pipeline_model_parallel_world_size()-1:
+    if pipeline_rank < mpu.get_pipeline_model_parallel_world_size()-1 or virtual_pipeline_rank < mpu.get_virtual_pipeline_model_parallel_world_size()-1: 
         op_start_index_next_stage, op_end_index_next_stage = get_next_stage_index(pipeline_rank, virtual_pipeline_rank)
         for op_index in range(op_start_index, op_end_index):
             op = model_chunk_op_list[op_index - op_start_index]
@@ -214,7 +205,7 @@ def initialize_communication(model_chunk_op_list):
     else:
         for op_index in range(op_start_index, op_end_index):
             op = model_chunk_op_list[op_index - op_start_index]
-            for key in sorted(op.output_extra_tensors_info):
+            for key in sorted(op.output_extra_tensors_info):        
                 op.output_extra_tensors_info[key]["cross_stage"] = False
 
     prev_stage = mpu.get_prev_pipeline_model_parallel_rank()
@@ -244,38 +235,16 @@ def initialize_communication(model_chunk_op_list):
         if key in output_extra_tensors_dict:
             bwd_recv_info["tensors"][key]["extra_tensor"] = True
         else:
-            bwd_recv_info["tensors"][key]["extra_tensor"] = False
+            bwd_recv_info["tensors"][key]["extra_tensor"] = False            
 
     mpu.set_comm_info(bwd_send_info, fwd_recv_info, fwd_send_info, bwd_recv_info)
-
+    
 def pre_forward_hook(op, input):
-    #print(op)
-    global op_idx
-    take_time_fwd_start_events[op_idx] = torch.cuda.Event(enable_timing=True)
-    take_time_fwd_start_events[op_idx].record()
+    pass
 
 def post_forward_hook(op, input, output):
-    global op_idx
     if DEBUG_OUTPUT:
         print_tensors(op.name, output)
-    #print(f"op_idx is {op_idx}")
-    take_time_fwd_end_events[op_idx] = torch.cuda.Event(enable_timing=True)
-    take_time_fwd_end_events[op_idx].record()
-    op_idx+=1
-
-
-def pre_backward_hook(op, input):
-    print(f"HERE!")
-    global bwd_op_idx
-    take_time_bwd_start_events[bwd_op_idx] = torch.cuda.Event(enable_timing=True)
-    take_time_bwd_start_events[bwd_op_idx].record()
-
-def post_backward_hook(op, input, output):
-    global bwd_op_idx
-    take_time_bwd_end_events[bwd_op_idx] = torch.cuda.Event(enable_timing=True)
-    take_time_bwd_end_events[bwd_op_idx].record()
-    bwd_op_idx-=1
-
 
 ## Current assumption is, there will be no resharding on the output extra tensors.
 def pre_forward_tensor_adapter_hook(op, input):
@@ -289,7 +258,7 @@ def pre_forward_tensor_adapter_hook(op, input):
                 break
         if input_mats is None:
             ## currently this is only for embedding op.
-            input_mats = np.array(all_ranks).reshape([1, 1, 1, op.dp_size, op.tp_size])
+            input_mats = np.array(all_ranks).reshape([1, 1, 1, op.dp_size, op.tp_size]) 
 
         input_mats_ = {}
         for name in op.required_input_specs:
@@ -308,7 +277,7 @@ def pre_forward_tensor_adapter_hook(op, input):
                 op.output_specs[name] = input_specs[from_tensor]
         else:
             for name in input_tensors:
-                tensor_, tensor_mat_ = tensor_adapter(input_tensors[name], input_specs[name], op.required_input_specs[name], input_mats[name])
+                tensor_, tensor_mat_ = tensor_adapter(input_tensors[name], input_specs[name], op.required_input_specs[name], input_mats[name])          
                 input_tensors[name] = tensor_
                 input_mats[name] = tensor_mat_
                 ## workaround for encoder_output
@@ -317,17 +286,17 @@ def pre_forward_tensor_adapter_hook(op, input):
                     op.output_specs[name] = input_specs[name]
 
         op.input_mats = input_mats
-
+    
         ## current workaround for extra tensors.
         input_extra_specs = input_tensors_specs_mats["input_extra_tensor_specs"]
         input_extra_mats = input_tensors_specs_mats["input_extra_tensor_mats"]
         op.tmp_buffer = [input_extra_specs, input_extra_mats]
         if not op.elementwise:
             for name in op.required_input_extra_specs:
-                if name in input_extra_specs:
+                if name in input_extra_specs:                    
                     tensor_, _ = tensor_adapter(input_extra_tensors[name], input_extra_specs[name], op.required_input_extra_specs[name], input_extra_mats[name])
                     input_extra_tensors[name] = tensor_
-
+ 
     return input_tensors, input_extra_tensors, output_extra_tensors
 
 def post_forward_tensor_adapter_hook(op, input, output):
@@ -337,12 +306,12 @@ def post_forward_tensor_adapter_hook(op, input, output):
     if op.is_last_op:
         ## new fix for the mismatch in the shape of residual tensors for renset: (when a stage changes the partition between pruducing residual and sending residual)
         input_tensors_specs_mats, input_extra_tensors, output_extra_tensors = input
-        if "input_residual" in output_extra_tensors and "input_residual" not in op.new_input_extra_tensors:
+        if "input_residual" in output_extra_tensors and "input_residual" not in op.new_input_extra_tensors:          
             input_extra_tensor_specs = op.tmp_buffer[0]
             input_extra_tensor_mats = op.tmp_buffer[1]
             tensor_, _ = tensor_adapter(output_extra_tensors["input_residual"], input_extra_tensor_specs["input_residual"], op.output_specs["input"], input_extra_tensor_mats["input_residual"])
             output_extra_tensors["input_residual"] = tensor_
-        return output
+        return output 
     else:
         output_tensors_specs_mats = {}
         output_tensors_specs_mats["tensors"] = output
@@ -372,20 +341,20 @@ def post_forward_tensor_adapter_hook(op, input, output):
         else:
             input_extra_tensor_specs = op.tmp_buffer[0]
             input_extra_tensor_mats = op.tmp_buffer[1]
-            output_tensors_specs_mats["input_extra_tensor_specs"] = input_extra_tensor_specs
-            output_tensors_specs_mats["input_extra_tensor_mats"] = input_extra_tensor_mats
+            output_tensors_specs_mats["input_extra_tensor_specs"] = input_extra_tensor_specs 
+            output_tensors_specs_mats["input_extra_tensor_mats"] = input_extra_tensor_mats 
 
         ## current workaround for extra tensors.
         for name in op.new_input_extra_tensors:
             if len(op.output_extra_mats_info[name]) == 0:
                 from_tensor_name = "input"
                 output_tensors_specs_mats["input_extra_tensor_specs"][name] = op.output_extra_specs[name]
-                output_tensors_specs_mats["input_extra_tensor_mats"][name] = op.input_mats[from_tensor_name]
+                output_tensors_specs_mats["input_extra_tensor_mats"][name] = op.input_mats[from_tensor_name]   
             else:
                 from_tensor = op.output_extra_mats_info[name]["from"]
                 trans_mat = op.output_extra_mats_info[name]["trans"]
                 output_tensors_specs_mats["input_extra_tensor_specs"][name] = op.output_extra_specs[name]
-                output_tensors_specs_mats["input_extra_tensor_mats"][name] = op.input_mats[from_tensor].transpose(trans_mat)
+                output_tensors_specs_mats["input_extra_tensor_mats"][name] = op.input_mats[from_tensor].transpose(trans_mat)     
 
         return output_tensors_specs_mats
 
@@ -394,7 +363,7 @@ class FlexPipeModel(MegatronModule):
         super(FlexPipeModel, self).__init__()
         args = get_args()
         self.model_name = args.model_name
-
+    
         self.saved_tensors = {}
         self.pre_process = pre_process
         self.post_process = post_process
@@ -416,28 +385,12 @@ class FlexPipeModel(MegatronModule):
             pre_hook = pre_forward_hook
             post_hook = post_forward_hook
         for op in self.ops:
-            op.register_forward_pre_hook(pre_hook)
-            op.register_forward_hook(post_hook)
-            op.register_full_backward_pre_hook(pre_backward_hook)
-            op.register_full_backward_hook(post_backward_hook)
+            op.register_forward_pre_hook(pre_hook)    
+            op.register_forward_hook(post_hook)     
 
         self.num_ops = len(full_model_op_list)
         initialize_communication(full_model_op_list)
         print_ops_info(self.ops, self.recompute_ops)
-
-        self.layers = [0,1,2,3]
-        self.ops_start = {
-            0: 0,
-            1: 1,
-            2: 14,
-            3: 27
-        }
-        self.ops_end = {
-            0: 0,
-            1: 13,
-            2: 26,
-            3: 28
-        }
 
     def _checkpointed_forward(self, start, end, input_tensors, input_extra_tensors, output_extra_tensors, tmp_input_extra_tensors={}):
 
@@ -453,7 +406,7 @@ class FlexPipeModel(MegatronModule):
         is_end_op = (end == self.num_ops)
 
         def custom(start, end, input_tensor_names, input_extra_tensor_names, output_tensor_names, tmp_input_extra_tensors, output_extra_tensors):
-            def custom_forward(*inputs):
+            def custom_forward(*inputs):         
                 x_ = {}
                 input_extra_tensors_dict = {}
 
@@ -481,7 +434,7 @@ class FlexPipeModel(MegatronModule):
             return custom_forward
 
         def custom_reshard(start, end, input_tensor_names, input_extra_tensor_names, output_tensor_names, tmp_input_extra_tensors, output_extra_tensors, input_tensors_specs_mats, output_tensors_specs_mats):
-            def custom_forward(*inputs):
+            def custom_forward(*inputs):      
                 x_ = {}
                 input_extra_tensors_dict = {}
 
@@ -507,7 +460,7 @@ class FlexPipeModel(MegatronModule):
                     x_ = op(x_, input_extra_tensors_dict, output_extra_tensors)
 
                 output_tensor_list = []
-                if not is_end_op:
+                if not is_end_op: 
                     for key in sorted(x_["tensors"]):
                         output_tensor_names.append(key)
                         output_tensor_list.append(x_["tensors"][key])
@@ -539,7 +492,7 @@ class FlexPipeModel(MegatronModule):
         # dict -> tuple (list)
         input_tensor_list = []
         input_extra_tensor_list = []
-
+         
         if self.resharding and not is_start_op:   # The first op does not have resharding hook.
             for key in sorted(input_tensors["tensors"]):
                 input_tensor_names.append(key)
@@ -547,7 +500,7 @@ class FlexPipeModel(MegatronModule):
         else:
             for key in sorted(input_tensors):
                 input_tensor_names.append(key)
-                input_tensor_list.append(input_tensors[key])
+                input_tensor_list.append(input_tensors[key])            
 
         for key in sorted(input_extra_tensors):
             input_extra_tensor_names.append(key)
@@ -555,18 +508,18 @@ class FlexPipeModel(MegatronModule):
 
         list_inputs = input_tensor_list + input_extra_tensor_list
 
-        if self.resharding:
+        if self.resharding:   
             output_tensors_specs_mats ={}
             output_tensors = mpu.checkpoint(
                 custom_reshard(start, end, input_tensor_names, input_extra_tensor_names, output_tensor_names, tmp_input_extra_tensors, output_extra_tensors, input_tensors, output_tensors_specs_mats),
-                *list_inputs)
+                *list_inputs)      
         else:
             output_tensors = mpu.checkpoint(
                 custom(start, end, input_tensor_names, input_extra_tensor_names, output_tensor_names, tmp_input_extra_tensors, output_extra_tensors),
-                *list_inputs)
+                *list_inputs)      
 
         # return output_tensors
-        if self.resharding and not is_end_op:
+        if self.resharding and not is_end_op:  
             output_tensors_dict = {}
             output_tensors_dict["tensors"] = {}
             for i in range(len(output_tensors)):
@@ -574,11 +527,11 @@ class FlexPipeModel(MegatronModule):
             output_tensors_dict["specs"] =  output_tensors_specs_mats["specs"]
             output_tensors_dict["mats"] =  output_tensors_specs_mats["mats"]
             output_tensors_dict["input_extra_tensor_specs"] =  output_tensors_specs_mats["input_extra_tensor_specs"]
-            output_tensors_dict["input_extra_tensor_mats"] =  output_tensors_specs_mats["input_extra_tensor_mats"]
+            output_tensors_dict["input_extra_tensor_mats"] =  output_tensors_specs_mats["input_extra_tensor_mats"]            
         else:
             output_tensors_dict = {}
             for i in range(len(output_tensors)):
-                output_tensors_dict[output_tensor_names[i]] = output_tensors[i]
+                output_tensors_dict[output_tensor_names[i]] = output_tensors[i]                            
         return output_tensors_dict
 
     def get_inputs(self, op_name):
@@ -598,14 +551,8 @@ class FlexPipeModel(MegatronModule):
         forward_step_func"""
         self.input_tensor = input_tensor
 
-    def forward(self, inputs, input_extra_tensors):
+    def forward(self, inputs, input_extra_tensors):    
         global NUM_BATCHES
-        global last_op_idx
-        global op_idx
-        global bwd_op_idx
-
-        op_idx = 0
-        bwd_op_idx = self.num_ops-1
         output_extra_tensors = {}
         args = get_args()
 
@@ -614,7 +561,7 @@ class FlexPipeModel(MegatronModule):
         else:
             hidden_states = inputs
 
-        if self.checkpoint_activations:
+        if self.checkpoint_activations: 
             start_index = 0
             end_index = self.num_ops
 
@@ -632,63 +579,31 @@ class FlexPipeModel(MegatronModule):
                             break
 
                     tmp_input_extra_tensors = {}
-                    hidden_states = self._checkpointed_forward(start_index, checkpoint_end_index, hidden_states,
-                                                            input_extra_tensors,
+                    hidden_states = self._checkpointed_forward(start_index, checkpoint_end_index, hidden_states, 
+                                                            input_extra_tensors, 
                                                             output_extra_tensors, tmp_input_extra_tensors)
                     for key in tmp_input_extra_tensors:
                         input_extra_tensors[key] = tmp_input_extra_tensors[key]
 
-                    start_index = checkpoint_end_index
+                    start_index = checkpoint_end_index   
         else:
-            # torch.cuda.synchronize()
-            # start = time.time()
-            print(f"num_ops is {self.num_ops}")
-            last_op_idx = self.num_ops
-
             for index in range(self.num_ops):
                 op = self.ops[index]
-                print(f"Do fwd pass with index {index}, op is {op}")
                 hidden_states = op(hidden_states, input_extra_tensors, output_extra_tensors)
-                # if index in self.limits:
-                #     torch.cuda.synchronize()
-                #     end = time.time()
-                #     print(f"It took {end-start}")
-                #     start = time.time()
 
         NUM_BATCHES = NUM_BATCHES + 1
         output = hidden_states
 
-        # forward
-        for i,l in enumerate(self.layers):
-            start_op = self.ops_start[l]
-            end_op = self.ops_end[l]
-            end_event = take_time_fwd_end_events[end_op]
-            end_event.synchronize()
-            start_event = take_time_fwd_start_events[start_op]
-            time_sec_i = start_event.elapsed_time(end_event) / 1000
-            print(f"layer {i} FWD, took {time_sec_i} sec")
-
-        # backward
-        for i,l in enumerate(self.layers):
-            start_op = self.ops_start[l]
-            end_op = self.ops_end[l]
-            end_event = take_time_bwd_end_events[start_op]
-            end_event.synchronize()
-            start_event = take_time_bwd_start_events[end_op]
-            time_sec_i = start_event.elapsed_time(end_event) / 1000
-            print(f"layer {i} BWD, took {time_sec_i} sec")
-
-        if self.post_process:
+        if self.post_process:            
             return output
         else:
-            return output, output_extra_tensors
-
+            return output, output_extra_tensors  
 
 def get_flex_model(full_model_op_list, pre_process=True, post_process=True):
     args = get_args()
 
-    language_model = FlexPipeModel(full_model_op_list,
-            pre_process=pre_process,
+    language_model = FlexPipeModel(full_model_op_list, 
+            pre_process=pre_process, 
             post_process=post_process)
 
     return language_model

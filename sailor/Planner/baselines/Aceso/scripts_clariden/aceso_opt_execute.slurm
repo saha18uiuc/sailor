@@ -47,7 +47,7 @@ LAUNCHER="torchrun \
 "
 
 CMD=" \
-    runtime/pretrain_gpt.py \
+    /root/sailor/sailor/Planner/baselines/Aceso/runtime/pretrain_gpt.py \
     --flexpipe-config $CONFIG_SAVE_PATH${file_name} \
     --train-iters $TRAIN_ITERS \
     --eval-iters 0 \
@@ -71,7 +71,6 @@ CMD=" \
 srun -A a-infra02 -t 05:00:00 -ul --container-writable --environment=/capstor/scratch/cscs/$USER/sailor/ae_scripts/clariden_scripts/sailor.toml /bin/bash -c "
 
 echo 'hello'
-cd $ROOT_PATH
 $LAUNCHER --node_rank \$SLURM_PROCID $CMD
 
 "
