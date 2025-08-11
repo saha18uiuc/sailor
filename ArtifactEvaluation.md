@@ -35,7 +35,7 @@ Notes:
 
 **Note: If you are running on a different project than a-infra02, please replace a-infra02 with your project ID in [ae_scripts/clariden_scripts/run.sh](ae_scripts/clariden_scripts/run.sh) and [ae_scripts/clariden_scripts/run_opt.slurm](ae_scripts/clariden_scripts/run_opt.slurm)**
 
-3. Follow the instructions in Step 1 at [sailor/sailor/Planner/baselines/Aceso/README.md](/sailor/sailor/Planner/baselines/Aceso/README.md) to run the Aceso jobs.
+3. Follow the instructions in Step 1 at [sailor/Planner/baselines/Aceso/README.md](/sailor/Planner/baselines/Aceso/README.md) to run the Aceso jobs.
 
 **To save time, while the jobs are running, you can proceed to section 2, 'Planner evaluation', which is independent of the Clariden experiments, and can run on any machine. For this, make sure you have built the Sailor image with docker, and you are inside the Sailor container**
 
