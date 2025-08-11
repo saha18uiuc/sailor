@@ -51,7 +51,7 @@ def plot(baselines_sim, results_path):
 
 if __name__ == "__main__":
     results_path = sys.argv[1]
-    baselines = ['Piper', 'Varuna',  'Metis', 'FlashFlex', 'SAILOR'] # 'Aceso',
+    baselines = ['Piper', 'Varuna',  'Metis', 'FlashFlex', 'Aceso', 'SAILOR']
     baselines_sim = {}
     plot_time=(sys.argv[2]=="time")
     sz = None
