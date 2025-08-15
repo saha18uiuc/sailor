@@ -47,13 +47,13 @@ LAUNCHER="torchrun \
 "
 
 CMD=" \
-    runtime/pretrain_gpt.py \
+    /root/sailor/sailor/Planner/baselines/Aceso/runtime/pretrain_gpt.py \
     --flexpipe-config $CONFIG_SAVE_PATH${file_name} \
     --train-iters $TRAIN_ITERS \
     --eval-iters 0 \
     --lr-decay-iters 320000 \
-    --vocab-file runtime/vocabs/gpt2-vocab.json \
-    --merge-file runtime/vocabs/gpt2-merges.txt \
+    --vocab-file /root/sailor/third_party/Megatron-DeepSpeed/data/gpt2-vocab.json \
+    --merge-file /root/sailor/third_party/Megatron-DeepSpeed/data/gpt2-merges.txt \
     --data-impl mmap \
     --split 949,50,1 \
     --distributed-backend nccl \
@@ -65,13 +65,12 @@ CMD=" \
     --lr-warmup-fraction .01 \
     --log-interval 1 \
     --DDP-impl local \
-    --log-path $LOG_PATH 
+    --log-path $LOG_PATH
 "
 
-srun -A a-a09 -t 00:30:00 -ul --container-writable --environment=/capstor/store/cscs/swissai/a09/zzhendong/sailor.toml /bin/bash -c "
+srun -A a-infra02 -t 05:00:00 -ul --container-writable --environment=/capstor/scratch/cscs/$USER/sailor/ae_scripts/clariden_scripts/sailor.toml /bin/bash -c "
 
 echo 'hello'
-cd $ROOT_PATH
 $LAUNCHER --node_rank \$SLURM_PROCID $CMD
 
 "

@@ -11,21 +11,21 @@ Sailor, as well as the rest baselines need this information. We will profile net
 
 1. Run profiling script
 
-Go to 'sailor/profiling/networking' directory.
+Go to 'sailor/profiling/networking' directory. The file run.sh is called with arguments <world_size>, <start_rank>, <IP>, <port>. Assume a free port <p>
 
 For a pair of 2 GPUs:
 
 ```bash
-bash run.sh 2 0 127.0.0.1 <free_port>
-bash run.sh 2 1 127.0.0.1 <free_port>
+bash run.sh 2 0 127.0.0.1 <p>
+bash run.sh 2 1 127.0.0.1 <p>
 ```
 This will generate a data2.csv file.
 
 For a pair of 4 GPUs:
 
 ```bash
-bash run.sh 4 0 127.0.0.1 <free_port>
-bash run.sh 4 2 127.0.0.1 <free_port>
+bash run.sh 4 0 127.0.0.1 <p>
+bash run.sh 4 2 127.0.0.1 <p>
 ```
 
 This will generate a data4.csv file.
@@ -42,7 +42,7 @@ Do the same for the other generated files as well.
 
 3. Add generated info to the appropriate files
 
-Put the coeffecients and max network bandwidth found in the [sailor/providers/intra_node_bandwidths.json](sailor/providers/intra_node_bandwidths.json) and [sailor/providers/network_coeffs_all_homo.json](sailor/providers/network_coeffs_all_homo.json) (under the "intra" keyword) for all gpu counts (look at the examples already provided).
+Put the coeffecients and max network bandwidth found in the [sailor/providers/intra_node_bandwidths.json](/sailor/providers/intra_node_bandwidths.json) and [sailor/providers/network_coeffs_all_homo.json](/sailor/providers/network_coeffs_all_homo.json) (under the "intra" keyword) for all gpu counts (look at the examples already provided).
 
 
 ### 2. Profile bandwidth across machines + update profiling files
@@ -50,7 +50,7 @@ Put the coeffecients and max network bandwidth found in the [sailor/providers/in
 1. Run profiling script
 
 Do the same as before, but:
-* Change '127.0.0.1' to an IP address/hostname discoverable across machines
+* Change '127.0.0.1' to an IP address/hostname discoverable across machines. It should be the IP address/hostname of the node with <start_rank>==0
 * Also run for world_size=8 (assuming again 4 GPUs per node)
 
 2. Fit function to get network coefficients (used by Sailor), and max network bandwidth (used by baselines)
@@ -60,8 +60,8 @@ Same as before
 3. Add generated info to the appropriate files
 
 Same as before, but now update:
-1. the [sailor/providers/network_coeffs_all_homo.json](sailor/providers/network_coeffs_all_homo.json) under "inter"
-2. the [sailor/providers/multizone_bandwidths.json](sailor/providers/multizone_bandwidths.json)
+1. the [sailor/providers/network_coeffs_all_homo.json](/sailor/providers/network_coeffs_all_homo.json) under "inter"
+2. the [sailor/providers/multizone_bandwidths.json](/sailor/providers/multizone_bandwidths.json)
 
 ## 2. Model Profiling
 
@@ -74,6 +74,8 @@ The script *profile.sh* profiles a given model under different combinations of t
 cd /root/sailor/third_party/Megatron-DeepSpeed
 bash profile.sh <model_name> <prof_dir>
 ```
+
+e.g. `bash profile.sh OPT-350 tests_profs`
 A file will be generated in the form of *profile_model_gpu_tmp_mbs.json*, where *tmp* is the Tensor Model parallel degree, and *mbs* is the microbatch size.
 
 ### 2. Generate results for Sailor
@@ -86,7 +88,7 @@ cd /root/sailor/sailor/profiling
 python gather_profs.py --model-name <model> --gpu-type <gpu_type> --profile-dir <prof_dir> --sailor-parent-dir <path_to_sailor_dir>
 
 ```
-
+e.g. `python gather_profs.py --model-name OPT-350 --gpu-type A100 --profile-dir ~/sailor/third_party/Megatron-DeepSpeed/test_profs --sailor-parent-dir /root`
 This will:
 1. Generate a file of the form *model/gpu/profile.json* under *sailor/Planner/sailor_planner/profiles/*, containing timing information.
 2. Append memory-specific info for the model in the file *sailor/Planner/llm_info.json*.
@@ -95,7 +97,7 @@ This will:
 ### 3. Generate results for baselines
 
 If you are adding a new GPU type, make sure that network profiling is done, as mentioned above.
-Also, make sure to update the GPU_MEMORY_GB dictionary in [sailor/Planner/simulations/constants.py](sailor/Planner/simulations/constants.py).
+Also, make sure to update the GPU_MEMORY_GB dictionary in [sailor/Planner/simulations/constants.py](/sailor/Planner/simulations/constants.py).
 All baselines require some profiling information that we can extract from the data we already collected. Some baselines require some extra information which we collect:
 
 ### For Varuna
@@ -106,13 +108,14 @@ All baselines require some profiling information that we can extract from the da
 cd /root/sailor/third_party/Megatron-DeepSpeed
 bash profile_varuna.sh <model_name> <prof_dir>
 ```
+This should generate a json file under <prof_dir>.
 
 2. Generate profiles:
 
 ```bash
 
 cd /root/sailor/sailor/profiling/baselines
-bash generate_varuna.sh
+bash generate_varuna.sh <path_to_the_generated_file_from_prev_step>
 ```
 
 Adapt the GPU type, and number of GPUs per VM accordingly in the file
@@ -127,7 +130,9 @@ bash profile_galvatron.sh <model_name> <prof_dir>
 Copy the <prof_dir>/memory_profiles.json under a directory sailor/Planner/baselines/Galvatron/profiles/<model_name>/<gpu_type>
 ```
 
-### For the rest baselines
+2. Get the communication-computation overlap coefficient, for 2, 4 GPUs etc using the [sailor/sailor/profiling/baselines/profile_overlap_galvatron.sh](/sailor/sailor/profiling/baselines/profile_overlap_galvatron.sh) file. Note that you have to do it for every tensor-parallel degree you profiled in step 1. Put the coefficients under [sailor/sailor/Planner/baselines/Galvatron/overlap_coe_dicts.json](/sailor/sailor/Planner/baselines/Galvatron/overlap_coe_dicts.json)
+
+### For the rest baselines (incl Galvatron)
 
 Generate profiles:
 

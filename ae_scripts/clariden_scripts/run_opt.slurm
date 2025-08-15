@@ -49,6 +49,7 @@ cat <<EOT > $config_json
   "steps_per_print": 2000,
   "wall_clock_breakdown": false
 }
+EOT
 
 # MODEL ARGS
 GPT_ARGS=" \
@@ -111,7 +112,7 @@ CMD=" \
 "
 
 
-srun -A a-infra02 -t 5:00:00 -ul --container-writable --environment=/capstor/scratch/cscs/$USER/sailor/clariden_scripts/sailor.toml /bin/bash -c "
+srun -A a-infra02 -t 5:00:00 -ul --container-writable --environment=/capstor/scratch/cscs/$USER/sailor/ae_scripts/clariden_scripts/sailor.toml /bin/bash -c "
 
 echo 'hello'
 

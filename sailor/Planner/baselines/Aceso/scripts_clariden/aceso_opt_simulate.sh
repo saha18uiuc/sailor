@@ -16,8 +16,8 @@ do
 
     python aceso_simulate_plan.py --gpu-type $GPU_TYPE \
         --profiling-file-dir profiler/$GPU_TYPE \
-        --training-config-path ../../simulations/tests/training_config_opt_350.json \
-        --cluster-config-path ../../simulations/tests/basic_cluster_config.json \
+        --training-config-path ../../simulations/configs/training_config_opt_350.json \
+        --cluster-config-path ../../simulations/configs/basic_cluster_config.json \
         --plan-path $CONFIG_SAVE_PATH${file_name} \
         2>&1 | tee ${LOG_PATH}aceso_${config_name}.log
 done
