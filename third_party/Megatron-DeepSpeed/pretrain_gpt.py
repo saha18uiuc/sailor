@@ -27,6 +27,12 @@ import subprocess
 from torch import nn
 import torch.nn.functional as F
 
+from megatron.model.kli_lora_loader import load_kli_lora
+
+def _getenv(key, default, cast=str):
+    v = os.getenv(key)
+    return cast(v) if v is not None else default
+
 
 def model_provider(pre_process=True, post_process=True, use_embedding=True, use_transformer=True, use_last=True, layers_per_stage=None):
     """Build the model."""
@@ -116,6 +122,50 @@ def model_provider(pre_process=True, post_process=True, use_embedding=True, use_
                 pre_process=pre_process,
                 post_process=post_process
             )
+
+        # Freeze base weights globally (belt-and-suspenders; wrapped linears are also frozen)
+        for p in model.parameters():
+            p.requires_grad = False
+
+        # --- LoRA via OUR fork (env-controlled) ---
+        if _getenv("LORA_ENABLE", "0") in ("1", "true", "True"):
+            lora = load_kli_lora()  # this is our fork's module
+
+            targets = [t.strip() for t in _getenv(
+                "LORA_TARGETS", "linear_qkv,linear_proj,linear_fc1,linear_fc2"
+            ).split(",") if t.strip()]
+            adapters = [s.strip() for s in _getenv("LORA_ADAPTERS", "adapterA").split(",") if s.strip()]
+            r = _getenv("LORA_R", 8, int)
+            alpha = _getenv("LORA_ALPHA", 16, int)
+            active = _getenv("ACTIVE_ADAPTER", None, str)
+
+            target_root = getattr(model, "decoder", model)
+
+            # Build "supernet" by adding ONE adapter per call to your fork's apply_lora
+            for name in adapters:
+                # sub-net part: alpha=0 for non-active to disable their contribution
+                a = alpha if (active is None or name == active) else 0
+                lora.apply_lora(
+                    target_root,
+                    target_modules=targets,
+                    r=r,
+                    lora_alpha=a,
+                    adapter_name=name,
+                )
+
+            def _count_wrapped(m):
+                from megatron.core.tensor_parallel.layers import ColumnParallelLinear, RowParallelLinear
+                return sum(
+                    1 for full_name, mod in m.named_modules()
+                    if isinstance(mod, (ColumnParallelLinear, RowParallelLinear))
+                    and any(t in full_name for t in targets)
+                )
+
+            from megatron import print_rank_0
+            print_rank_0(f"[LoRA] wrapped linear layers (target_root): {_count_wrapped(target_root)}")
+            print_rank_0(f"[LoRA] using fork file: {lora.__file__}")
+            print_rank_0(f"[LoRA] targets={targets} adapters={adapters} r={r} alpha={alpha} active={active}")
+        # -------------------------------------------
     see_memory_usage(f"After Building Model", force=True)
     return model
 
