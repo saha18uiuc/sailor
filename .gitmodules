@@ -1,0 +1,4 @@
+[submodule "third_party/kli_megatron"]
+	path = third_party/kli_megatron
+	url = https://github.com/KLi447/Megatron-LM.git
+	branch = dev/kev
