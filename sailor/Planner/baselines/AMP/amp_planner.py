@@ -120,6 +120,8 @@ class AMPPlanner(BaselinePlanner):
             pp = pp[0]
             tp = tp[0]
             ds_partition = plan[3]
+            if ds_partition is None:
+                continue
 
             layers_per_stage = []
             for i in range(len(ds_partition)-1):

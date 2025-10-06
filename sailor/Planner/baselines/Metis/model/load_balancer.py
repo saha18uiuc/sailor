@@ -21,7 +21,14 @@ class LayerLoadBalancer:
 
     def _get_nomalize_layer_duration(self) -> List[float]:
         device_type = next(iter(self.profile_data))
-        layers_duration = self.profile_data[device_type]['tp1_bs1']['time']['layer-computes']
+
+        if 'tp1_bs1' in self.profile_data[device_type]:
+            layers_duration = self.profile_data[device_type]['tp1_bs1']['time']['layer-computes']
+        # NOTE: we added this so that it does not fail if tp1_bs1 is not present (e.g. LLAMA3-8B with A100-40)
+        elif 'tp2_bs1' in self.profile_data[device_type]:
+            layers_duration = self.profile_data[device_type]['tp2_bs1']['time']['layer-computes']
+        elif 'tp4_bs1' in self.profile_data[device_type]:
+            layers_duration = self.profile_data[device_type]['tp4_bs1']['time']['layer-computes']
 
         total_layer_duration = sum(layers_duration)
         return [layer_duration / total_layer_duration for layer_duration in layers_duration]

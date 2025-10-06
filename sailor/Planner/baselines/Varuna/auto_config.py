@@ -65,6 +65,8 @@ class AutoConfig:
             mbs = self.get_microbatch_size(pp_size, 1, self.optimizer)
             if (mbs > 1) and (mbs % 2 != 0):
                 mbs -= 1
+            if mbs==-1:
+                continue
             # print(f"Predicted microbatch size for {pp_size}: {mbs}")
             self.micro_batch[pp_size] = mbs
             dp_size = self.num_gpus // pp_size
@@ -240,7 +242,7 @@ class AutoConfig:
             mem_usage = self.get_max_mem(mbs, tp, pp_size, pstages_per_stage, self.optimizer)
             if mem_usage <= limit:
                 break
-            mbs /= 2
+            mbs //= 2
 
         if mbs>0:
             return mbs

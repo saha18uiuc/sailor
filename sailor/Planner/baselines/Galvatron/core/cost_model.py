@@ -1,5 +1,6 @@
 import numpy as np
 import torch
+import math
 
 class MemoryCostModel:
     def __init__(self,
@@ -52,7 +53,10 @@ class MemoryCostModel:
             self.activation_size = tp_activation_per_bsz_dict['checkpoint'] * self.bsz
         else:
             #print(f"self.bsz is {self.bsz}, tp_activation_per_bsz_dict is {tp_activation_per_bsz_dict}, tp_size is {self.tp_size}")
-            self.activation_size = tp_activation_per_bsz_dict[self.tp_size] * self.bsz
+            if self.tp_size in tp_activation_per_bsz_dict:
+                self.activation_size = tp_activation_per_bsz_dict[self.tp_size] * self.bsz
+            else:
+                self.activation_size = math.inf # invalid config
 
         if chunks == 1:
             zero2_ratio = (lambda d: (7/8 * (1/d + 0.003) + 1/8)) if mixed_precision else (lambda d: (3/4 * (1/d + 0.003) + 1/4))

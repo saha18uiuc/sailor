@@ -132,6 +132,8 @@ def get_cost_c(cluster_info, model_config, parallel_config, amp_config, llm_info
 
         if layer_type != "noop":
             mp_str = str(int(mp.item()))
+            if mp_str not in llm_info:
+                return None
             # Our change: get activation count directly, to work for all models
             last_volume = bs * llm_info[mp_str][str(i)]['act_output_floats']
             layer_volume.append(last_volume)
@@ -439,6 +441,8 @@ def predict_single(config, bs, mbs, cluster_info, model_config, amp_config, oth,
     cost_c = get_cost_c(cluster_info=cluster_info,
                         model_config=model_config, parallel_config=parallel_config, amp_config=amp_config, llm_info=llm_info)
 
+    if cost_c is None or cost_e is None:
+        return None, None, None
 
     # The following line is the original AMP code (Dynamic Programming algo), which is replaced by the DeepSpeed uniform partition
     # partition, _ = pipe_ast(len(cost_e), np.asarray(cost_e), np.asarray(cost_c), int(pp.item()), int(B.item()))
