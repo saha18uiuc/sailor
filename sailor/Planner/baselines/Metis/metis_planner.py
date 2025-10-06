@@ -47,26 +47,32 @@ class MetisPlanner(BaselinePlanner):
         self.max_permute_len = max_permute_len
 
         self.max_profiled_tp_degree = 1
+        self.min_profiled_tp_degree = 8
+        self.min_profiled_tp_degree_dict = {}
         self.max_profiled_batch_size_dict = {}
         self.max_profiled_batch_size = 1024
 
         for key, value in self.profile_data.items():
+            print("key: ", key)
             if 'DeviceType' in key:
                 if key not in self.max_profiled_batch_size_dict:
                     self.max_profiled_batch_size_dict[key] = 1
+                    self.min_profiled_tp_degree_dict[key] = 8
                 for key_spec, _ in value.items():
+                    print("key_spec: ", key_spec)
                     tp, mbs = re.findall("\d+", key_spec)
                     tp = int(tp)
                     mbs = int(mbs)
                     self.max_profiled_tp_degree = max(self.max_profiled_tp_degree, tp)
-                    if tp==1:
+                    self.min_profiled_tp_degree = min(self.min_profiled_tp_degree, tp)
+                    if tp < self.min_profiled_tp_degree_dict[key]:
+                        self.min_profiled_tp_degree_dict[key] = tp
                         self.max_profiled_batch_size_dict[key] = max(self.max_profiled_batch_size_dict[key], mbs)
 
         for _,mbs in self.max_profiled_batch_size_dict.items():
             self.max_profiled_batch_size = min(self.max_profiled_batch_size, mbs)
 
         print(f"max_profiled_batch_size is {self.max_profiled_batch_size}")
-
         #time.sleep(1000)
 
     def _get_device_placement(self, gpu_cluster, plan):
@@ -109,7 +115,7 @@ class MetisPlanner(BaselinePlanner):
             rank_device_map = stage_performance.get_device_placement()
 
             intra_stage_plan_generator = IntraStagePlanGenerator(inter_stage_plan, stage_performance, layer_load_balancer,
-                                                                 self.max_profiled_tp_degree, self.max_profiled_batch_size)
+                                                                 self.max_profiled_tp_degree, self.min_profiled_tp_degree, self.max_profiled_batch_size)
 
             while intra_stage_plan_generator.has_next:
                 if time.time()-start_search_time > TIME_BUDGET_SEC:

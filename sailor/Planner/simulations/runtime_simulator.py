@@ -158,10 +158,21 @@ class Simulator():
         self.num_layers = training_config['num_all_layers']
         self.profiles = profiles[self.model]
 
-        self.activation_sizes_per_layer = [self.model_mem_info['1'][str(
-            layer)]['act_output_floats']*self.float_size for layer in range(self.num_layers)]
-        self.weight_sizes_per_layer = [self.model_mem_info['1'][str(
-            layer)]['params_floats']*self.float_size for layer in range(self.num_layers)]
+        if '1' in self.model_mem_info:
+            self.activation_sizes_per_layer = [self.model_mem_info['1'][str(
+                layer)]['act_output_floats']*self.float_size for layer in range(self.num_layers)]
+            self.weight_sizes_per_layer = [self.model_mem_info['1'][str(
+                layer)]['params_floats']*self.float_size for layer in range(self.num_layers)]
+        elif '2' in self.model_mem_info:
+            self.activation_sizes_per_layer = [self.model_mem_info['2'][str(
+                layer)]['act_output_floats']*self.float_size for layer in range(self.num_layers)]
+            self.weight_sizes_per_layer = [self.model_mem_info['2'][str(
+                layer)]['params_floats']*self.float_size*2 for layer in range(self.num_layers)]
+        elif '4' in self.model_mem_info:
+            self.activation_sizes_per_layer = [self.model_mem_info['4'][str(
+                layer)]['act_output_floats']*self.float_size for layer in range(self.num_layers)]
+            self.weight_sizes_per_layer = [self.model_mem_info['4'][str(
+                layer)]['params_floats']*self.float_size*4 for layer in range(self.num_layers)]
 
         # inter-node
         self.inter_network_coeffs = InterNodeNetworkInfo(
@@ -254,6 +265,9 @@ class Simulator():
                     gpu_type = tmp_config.vm_list[0].gpu_type  # TODO: fix for Metis
                     tmp = tmp_config.tmp
                     megatron_mem = 2.0 * 1e9 if tmp==1 else 3.0 * 1e9  # extra mem needed by megatron, shown in nvidia-smi, but not as part of torch mem
+
+                    if str(tmp) not in self.model_mem_info:
+                        return False
 
                     num_params = 0
                     for layer in stage:
@@ -411,7 +425,7 @@ class Simulator():
             bwd_times[gpu_type] = {}
             update_times[gpu_type] = {}
 
-            for tmp in prof_gpu.keys():
+            for tmp in prof_gpu["1"].keys():
                 tmp_int = int(tmp)
                 fwd_times[gpu_type][tmp_int] = []
                 bwd_times[gpu_type][tmp_int] = []

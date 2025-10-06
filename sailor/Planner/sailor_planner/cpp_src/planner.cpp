@@ -116,7 +116,8 @@ void SailorPlanner::build_structs()
 
     for (int tp : {1, 2, 4})
     {
-
+        if ((training_info->model).layer_params[tp][0] == 0.0)
+            continue;
         for (auto stages : all_stages)
         {
             for (auto stage : stages)
@@ -205,12 +206,17 @@ void SailorPlanner::build_structs()
                 {
                     auto stage = stages[stage_idx];
                     auto pp_key = tuple<int, int, int>(pp, stage[0], stage.size());
-                    // cout << gpu_type << "," << pp << "," << mbs << "," << stage_idx << endl;
+                    auto key = make_pair(stage[0], stage.size());
                     int min_tp = -1;
                     for (auto tp : possible_tmps_per_gpu[idx])
                     {
+                        if (params_all_stages[tp].find(key) == params_all_stages[tp].end())
+                            continue;
+
+                        //cout << gpu_type << "," << tp << "," << pp << "," << mbs << "," << stage_idx << endl;
                         if (check_stage_fits(stages, params_all_stages[tp], activation_per_stage[tp], stage_idx, mbs, tp, gpu_type, float_size))
                         {
+                            //printf("FITS!\n");
                             min_tp = tp;
                             break;
                         }
@@ -906,8 +912,6 @@ void SailorPlanner::get_plans_no_heuristics(unordered_map<string, vector<pair<st
                     cout << available_gpu_types[id] << endl;
                     debug_print(tmp_degrees[id]);
                 }
-
-                printf("HERE!\n");
 
                 // do regular search for that combo
                 vector<pair<string, vector<string>>> region_list = get_regions_list(

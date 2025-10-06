@@ -8,6 +8,7 @@ def run_all_for_model(args):
     train_config_files = {
         "OPT-350": f"{home_dir}/{sailor_sim_path}/configs/training_config_opt_350.json",
         "GPT-Neo-2.7": f"{home_dir}/{sailor_sim_path}/configs/training_config_gpt_neo27.json",
+        "LLAMA-3-8": f"{home_dir}/{sailor_sim_path}/configs/training_config_llama_3.json",
     }
 
     res_dir = args.res_dir
