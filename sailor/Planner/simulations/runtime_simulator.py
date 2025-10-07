@@ -8,8 +8,6 @@ from sailor.Planner.sailor_planner.constants import MEMORY_BUCKET_DEEPSPEED_SIZE
 from sailor.profiling.profile_utils import estimate_send_time, estimate_ar_time, find_bw, Zone, GPU_Type
 from sailor.Planner.sailor_planner.utils import partition_uniform
 
-from sailor.profiling.overlay_loader import load_overlay_from_env, apply_stage_overlay
-
 class VMconfig:
     def __init__(self, gpu_type, gpus_per_node, zone: Zone) -> None:
         self.gpu_type = gpu_type
@@ -362,14 +360,6 @@ class Simulator():
 
             update_time_per_stage.append(update)
             comp_time_per_stage.append(fwd_bwd)
-
-        # --- LoRA overlay: add per-stage compute deltas (sub-net latency) ---
-        _overlay = load_overlay_from_env()
-        _before = list(comp_time_per_stage)
-        comp_time_per_stage = apply_stage_overlay(comp_time_per_stage, _overlay)
-        if _overlay:
-            print(f"[overlay] name={_overlay.get('name','overlay')}, "
-                  f"before={_before}, after={comp_time_per_stage}")
 
         #comp_time_per_stage[1] += 1
         print(f"Pipeline stages is {pipeline.layers_per_stage}")
