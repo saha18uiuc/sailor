@@ -16,6 +16,8 @@ from .utils import (unwrap_model,
                     print_rank_0,
                     is_rank_0)
 
+from megatron.core.transformer.lora import LoraAdapter
+
 from deepspeed.checkpoint import (
     ORIGINAL_VOCAB_SIZE,
     PADDED_VOCAB_SIZE,
@@ -39,6 +41,21 @@ def get_checkpoint_version():
     global _CHECKPOINT_VERSION
     return _CHECKPOINT_VERSION
 
+# ---- LoRA helpers ----------------------------------------------------------
+def _collect_lora_state_dict(module: torch.nn.Module):
+    """Return a {key: tensor} dict of ONLY LoRA adapter params found in `module`."""
+    lora_sd = {}
+    for mod_name, child in module.named_modules():
+        if isinstance(child, LoraAdapter):
+            for p_name, p in child.named_parameters(recurse=False):
+                lora_sd[f"{mod_name}.{p_name}"] = p.detach().cpu()
+    return lora_sd
+
+def _merge_lora_into(base_sd: dict, module: torch.nn.Module) -> dict:
+    """Merge LoRA adapter params into an existing state_dict (no clobber of base keys)."""
+    lora_sd = _collect_lora_state_dict(module)
+    base_sd.update(lora_sd)
+    return base_sd
 
 def check_checkpoint_args(checkpoint_args):
     """Ensure fixed arguments for a model are the same for the input
@@ -273,12 +290,16 @@ def save_checkpoint(iteration, model, optimizer, opt_param_scheduler):
         # DeepSpeed saves the model/optimizer/scheduler
         if not args.deepspeed:
             if len(model) == 1:
-                state_dict['model'] = model[0].state_dict_for_save_checkpoint()
+                # state_dict['model'] = model[0].state_dict_for_save_checkpoint()
+                base_sd = model[0].state_dict_for_save_checkpoint()
+                state_dict['model'] = _merge_lora_into(base_sd, model[0])
             else:
                 for i in range(len(model)):
                     mpu.set_virtual_pipeline_model_parallel_rank(i)
-                    state_dict['model%d' % i] = \
-                        model[i].state_dict_for_save_checkpoint()
+                    # state_dict['model%d' % i] = \
+                        # model[i].state_dict_for_save_checkpoint()
+                    base_sd = model[i].state_dict_for_save_checkpoint()
+                    state_dict['model%d' % i] = _merge_lora_into(base_sd, model[i])
 
             # Optimizer stuff.
             if not args.no_save_optim:
@@ -303,8 +324,17 @@ def save_checkpoint(iteration, model, optimizer, opt_param_scheduler):
         if args.no_pipeline_parallel:
             original_state_dict = model[0].module.state_dict
             def state_dict_for_save_checkpoint_deepspeed(destination=None, prefix='', keep_vars=False):
-                return model[0].module.state_dict_for_save_checkpoint(prefix=prefix, keep_vars=keep_vars)
+                # return model[0].module.state_dict_for_save_checkpoint(prefix=prefix, keep_vars=keep_vars)
+                base = model[0].module.state_dict_for_save_checkpoint(prefix=prefix, keep_vars=keep_vars)
+                return _merge_lora_into(base, model[0].module)
             model[0].module.state_dict = state_dict_for_save_checkpoint_deepspeed
+        else:
+            # Pipeline parallel: ensure PipelineModule.state_dict() carries LoRA params too.
+            original_state_dict_pp = model[0].module.state_dict
+            def state_dict_with_lora_pp(*args, **kwargs):
+                base = original_state_dict_pp(*args, **kwargs)
+                return _merge_lora_into(base, model[0].module)
+            model[0].module.state_dict = state_dict_with_lora_pp
 
         # Saving is a collective communication
         checkpoint_name = get_checkpoint_name(args.save, iteration)
@@ -318,6 +348,8 @@ def save_checkpoint(iteration, model, optimizer, opt_param_scheduler):
 
         if args.no_pipeline_parallel:
             model[0].module.state_dict = original_state_dict
+        else:
+            model[0].module.state_dict = original_state_dict_pp
 
     # Wait so everyone is done (necessary)
     if torch.distributed.is_initialized():
@@ -550,6 +582,9 @@ def load_checkpoint(model, optimizer, opt_param_scheduler, load_arg='load', stri
         parameters and buffers in model.
     """
     args = get_args()
+    # If adapters are enabled, allow extra/missing keys (LoRA) during load.
+    if getattr(args, "apply_lora", False):
+        strict = False
     load_dir = getattr(args, load_arg)
 
     if args.deepspeed:

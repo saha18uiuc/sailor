@@ -18,6 +18,8 @@ from megatron.utils import get_ltor_masks_and_position_ids
 from megatron.utils import average_losses_across_data_parallel_group, update_rotary_pos_emb
 from megatron.arguments import core_transformer_config_from_args
 
+from megatron.core.transformer.lora import apply_lora, count_parameters
+
 import deepspeed
 from deepspeed.runtime.utils import see_memory_usage
 from deepspeed.accelerator.real_accelerator import get_accelerator
@@ -114,6 +116,35 @@ def model_provider(pre_process=True, post_process=True, use_embedding=True, use_
                 parallel_output=True,
                 pre_process=pre_process,
                 post_process=post_process
+            )
+
+        # ---------------------------------------------------------------------
+        # LoRA super-net injection (inside zero.Init so ZeRO-3 partitions LoRA)
+        # ---------------------------------------------------------------------
+        if getattr(args, "apply_lora", False):
+            # 1) Freeze base weights
+            for p in model.parameters():
+                p.requires_grad = False
+
+            # 2) Determine target module name substrings from CLI
+            targets = [t.strip() for t in args.lora_target_modules.split(",") if t.strip()]
+
+            # 3) Choose a sensible root; for Pipe models there may not be .decoder
+            root = model.decoder if hasattr(model, "decoder") else model
+
+            # 4) Wrap Column/RowParallelLinear modules with LoRA adapters
+            apply_lora(
+                root,
+                target_modules=targets,
+                r=args.lora_rank,
+                lora_alpha=args.lora_alpha,
+                adapter_name=getattr(args, "lora_adapter_name", "default"),
+            )
+
+            # 5) (Optional) print a quick sanity check
+            _cnt = count_parameters(model)
+            print_rank_0(
+                f"[LoRA] Trainable params: {_cnt['trainable']:,} / Total: {_cnt['total']:,}"
             )
 
     see_memory_usage(f"After Building Model", force=True)

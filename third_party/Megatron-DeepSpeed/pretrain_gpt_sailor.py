@@ -19,6 +19,8 @@ from megatron.utils import average_losses_across_data_parallel_group, update_rot
 from megatron.arguments import core_transformer_config_from_args
 from megatron.arguments import parse_args
 
+from megatron.core.transformer.lora import apply_lora, count_parameters
+
 import deepspeed
 from deepspeed.runtime.utils import see_memory_usage
 from deepspeed.accelerator.real_accelerator import get_accelerator

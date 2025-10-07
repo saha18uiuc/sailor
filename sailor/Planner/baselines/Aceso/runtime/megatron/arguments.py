@@ -445,6 +445,21 @@ def _add_training_args(parser):
     group.add_argument('--dataloader-type', type=str, default=None,
                        choices=['single', 'cyclic'],
                        help='Single pass vs multiple pass data loader')
+
+    group = parser.add_argument_group('LoRA / Adapters')
+    group.add_argument('--lora-rank', type=int, default=8,
+                    help='LoRA rank r')
+    group.add_argument('--lora-alpha', type=int, default=16,
+                    help='LoRA scaling alpha')
+    group.add_argument('--lora-dropout', type=float, default=0.0,
+                    help='LoRA dropout probability')
+    group.add_argument('--lora-target-modules', type=str, default='linear_qkv,linear_proj,linear_fc1,linear_fc2',
+                    help='Comma-separated substrings of module names to wrap with LoRA')
+    group.add_argument('--lora-adapter-name', type=str, default='default',
+                    help='Adapter name to register')
+    group.add_argument('--apply-lora', action='store_true',
+                    help='Enable LoRA injection (wrap TP linear layers with LoraLayer)')
+
     return parser
 
 
