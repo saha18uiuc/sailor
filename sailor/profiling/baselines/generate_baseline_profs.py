@@ -143,7 +143,8 @@ def generate_profile_Galvatron(timing_info, mem_info, max_num_nodes, gpus_per_no
     mem_dict['parameter_size'] = transformer_size_total
     mem_dict['tp_activation_per_bsz_dict'] = {}
     for tp in [1, 2, 4]:
-        mem_dict['tp_activation_per_bsz_dict'][tp] = mem_info[str(tp)]["1"]["act_mem_bytes"] / ONE_MB
+        if str(tp) in mem_info:
+            mem_dict['tp_activation_per_bsz_dict'][tp] = mem_info[str(tp)]["1"]["act_mem_bytes"] / ONE_MB
     mem_profile = {'layertype_0': mem_dict}
 
     # Taken from Galvatron - this takes into account extra memory in first and last layers

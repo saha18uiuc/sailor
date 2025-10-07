@@ -188,7 +188,7 @@ class InterStagePlanGenerator:
 
 class IntraStagePlanGenerator:
     def __init__(self, inter_stage_plan: InterStagePlan, stage_performance: StagePerformance,
-                 layer_load_balancer: LayerLoadBalancer, max_tp_degree: int, max_bs: int):
+                 layer_load_balancer: LayerLoadBalancer, max_tp_degree: int, min_tp_degree: int, max_bs: int):
         self.inter_stage_plan = inter_stage_plan
         self.device_groups = inter_stage_plan.device_groups
         self.gbs = inter_stage_plan.gbs
@@ -196,6 +196,7 @@ class IntraStagePlanGenerator:
         self.stage_performance = stage_performance
         self.layer_load_balancer = layer_load_balancer
         self.max_tp_degree = max_tp_degree
+        self.min_tp_degree = min_tp_degree
         self.max_bs = max_bs
 
         self.curr = IntraStagePlan(strategies=[], memory_state=[], layer_partition=[], num_repartition=0)
@@ -256,6 +257,8 @@ class IntraStagePlanGenerator:
             if tp_deg > self.max_tp_degree:
                 # log for debugging
                 #print(f'invalid_strategy: tp_deg({tp_deg})')
+                return False
+            if tp_deg < self.min_tp_degree:
                 return False
         return True
 

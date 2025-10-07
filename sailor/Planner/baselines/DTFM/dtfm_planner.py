@@ -1,6 +1,7 @@
 import json
 import os
 import numpy as np
+import math
 
 from sailor.Planner.baselines.baseline_planner import BaselinePlanner
 from sailor.Planner.baselines.DTFM.scheduler import GCMA, compute_data_parallel_cost, compute_pipeline_parallel_cost, get_pipelines
@@ -29,7 +30,11 @@ class DTFMPlanner(BaselinePlanner):
         self.model_mem_info = llm_info[self.model]
         self.float_size = 2 if fp16 else 4
 
-        self.base_activation = self.model_mem_info["1"]["1"]["act_mem_floats"] * self.float_size # transformer
+        # dtfm only supports TP 1
+        if "1" in self.model_mem_info:
+            self.base_activation = self.model_mem_info["1"]["1"]["act_mem_floats"] * self.float_size # transformer
+        else:
+            self.base_activation = math.inf
 
     def get_plan_backend_config(self, pp, dp, mbs):
 

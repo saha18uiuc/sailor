@@ -76,9 +76,9 @@ bool check_stage_fits(
     double af_stage = activation_per_stage[key] * mbs * float_size;
 
     // printf(
-    //     "Stage %d, Num layers %d, params %lu, mf %f GB, af is %f floats, af_stage is %f GB, af_stage_total is %f\n",
+    //     "Stage %d, Num layers %d, params %lu, mf %f GB, af is %f floats, af_stage is %f GB, total is %f\n",
     //     stage_idx, stages[stage_idx].size(), params_per_stage[key], mf/(1e9),
-    //     activation_per_stage[key] * mbs, af_stage/1e9, (af_stage*(num_stages - stage_idx))/1e9
+    //     activation_per_stage[key] * mbs, af_stage/1e9, (mf+af_stage*(num_stages - stage_idx)+megatron_mem)/1e9
     // );
 
     double mem_used = mf + af_stage * (num_stages - stage_idx) + megatron_mem;
@@ -457,6 +457,10 @@ vector<vector<int>> find_tmp_degrees(
                 break;
             }
 
+            if (mbs >= min_tmps_vector_per_gpu[gpu_idx].size()) {
+                all_tp_found = false;
+                break;
+            }
             int tp_stage = min_tmps_vector_per_gpu[gpu_idx][mbs][key];
             if (tp_stage == -1)
             {
